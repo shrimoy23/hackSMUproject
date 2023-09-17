@@ -617,110 +617,6 @@ Button */
            <number>0</number>
           </property>
           <item>
-           <widget class="QFrame" name="topLogoInfo">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>50</height>
-             </size>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Raised</enum>
-            </property>
-            <widget class="QFrame" name="topLogo">
-             <property name="geometry">
-              <rect>
-               <x>10</x>
-               <y>5</y>
-               <width>42</width>
-               <height>42</height>
-              </rect>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>42</width>
-               <height>42</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>42</width>
-               <height>42</height>
-              </size>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::NoFrame</enum>
-             </property>
-             <property name="frameShadow">
-              <enum>QFrame::Raised</enum>
-             </property>
-            </widget>
-            <widget class="QLabel" name="titleLeftApp">
-             <property name="geometry">
-              <rect>
-               <x>70</x>
-               <y>8</y>
-               <width>160</width>
-               <height>20</height>
-              </rect>
-             </property>
-             <property name="font">
-              <font>
-               <family>Segoe UI Semibold</family>
-               <pointsize>12</pointsize>
-               <italic>false</italic>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>PyDracula</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-             </property>
-            </widget>
-            <widget class="QLabel" name="titleLeftDescription">
-             <property name="geometry">
-              <rect>
-               <x>70</x>
-               <y>27</y>
-               <width>160</width>
-               <height>16</height>
-              </rect>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Segoe UI</family>
-               <pointsize>8</pointsize>
-               <italic>false</italic>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="text">
-              <string>Modern GUI / Flat Style</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-             </property>
-            </widget>
-           </widget>
-          </item>
-          <item>
            <widget class="QFrame" name="leftMenuFrame">
             <property name="frameShape">
              <enum>QFrame::NoFrame</enum>
@@ -906,42 +802,6 @@ Button */
                   </property>
                   <property name="text">
                    <string>New</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="btn_widgets">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>45</height>
-                   </size>
-                  </property>
-                  <property name="font">
-                   <font>
-                    <family>Segoe UI</family>
-                    <pointsize>10</pointsize>
-                    <italic>false</italic>
-                    <bold>false</bold>
-                   </font>
-                  </property>
-                  <property name="cursor">
-                   <cursorShape>PointingHandCursor</cursorShape>
-                  </property>
-                  <property name="layoutDirection">
-                   <enum>Qt::LeftToRight</enum>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">background-image: url(:/icons/images/icons/cil-gamepad.png);</string>
-                  </property>
-                  <property name="text">
-                   <string>Widgets</string>
                   </property>
                  </widget>
                 </item>
@@ -1810,13 +1670,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
                       <number>0</number>
                      </property>
                      <property name="currentIndex">
-                      <number>2</number>
+                      <number>0</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
-                       <string notr="true">background-image: url(:/images/images/images/PyDracula_vertical.png);
-background-position: center;
-background-repeat: no-repeat;</string>
+                       <string notr="true"/>
                       </property>
                      </widget>
                      <widget class="QWidget" name="widgets">
@@ -2114,7 +1972,7 @@ background-repeat: no-repeat;</string>
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>218</width>
+                                 <width>344</width>
                                  <height>218</height>
                                 </rect>
                                </property>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainIpapUv.ui'
+## Form generated from reading UI file 'mainMggxrN.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.5.2
 ##
@@ -581,43 +581,6 @@ class Ui_MainWindow(object):
         self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
-        self.topLogoInfo = QFrame(self.leftMenuBg)
-        self.topLogoInfo.setObjectName(u"topLogoInfo")
-        self.topLogoInfo.setMinimumSize(QSize(0, 50))
-        self.topLogoInfo.setMaximumSize(QSize(16777215, 50))
-        self.topLogoInfo.setFrameShape(QFrame.NoFrame)
-        self.topLogoInfo.setFrameShadow(QFrame.Raised)
-        self.topLogo = QFrame(self.topLogoInfo)
-        self.topLogo.setObjectName(u"topLogo")
-        self.topLogo.setGeometry(QRect(10, 5, 42, 42))
-        self.topLogo.setMinimumSize(QSize(42, 42))
-        self.topLogo.setMaximumSize(QSize(42, 42))
-        self.topLogo.setFrameShape(QFrame.NoFrame)
-        self.topLogo.setFrameShadow(QFrame.Raised)
-        self.titleLeftApp = QLabel(self.topLogoInfo)
-        self.titleLeftApp.setObjectName(u"titleLeftApp")
-        self.titleLeftApp.setGeometry(QRect(70, 8, 160, 20))
-        font1 = QFont()
-        font1.setFamilies([u"Segoe UI Semibold"])
-        font1.setPointSize(12)
-        font1.setBold(False)
-        font1.setItalic(False)
-        self.titleLeftApp.setFont(font1)
-        self.titleLeftApp.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-        self.titleLeftDescription = QLabel(self.topLogoInfo)
-        self.titleLeftDescription.setObjectName(u"titleLeftDescription")
-        self.titleLeftDescription.setGeometry(QRect(70, 27, 160, 16))
-        self.titleLeftDescription.setMaximumSize(QSize(16777215, 16))
-        font2 = QFont()
-        font2.setFamilies([u"Segoe UI"])
-        font2.setPointSize(8)
-        font2.setBold(False)
-        font2.setItalic(False)
-        self.titleLeftDescription.setFont(font2)
-        self.titleLeftDescription.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
-
-        self.verticalLayout_3.addWidget(self.topLogoInfo)
-
         self.leftMenuFrame = QFrame(self.leftMenuBg)
         self.leftMenuFrame.setObjectName(u"leftMenuFrame")
         self.leftMenuFrame.setFrameShape(QFrame.NoFrame)
@@ -684,18 +647,6 @@ class Ui_MainWindow(object):
         self.btn_new.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-file.png);")
 
         self.verticalLayout_8.addWidget(self.btn_new)
-
-        self.btn_widgets = QPushButton(self.topMenu)
-        self.btn_widgets.setObjectName(u"btn_widgets")
-        sizePolicy.setHeightForWidth(self.btn_widgets.sizePolicy().hasHeightForWidth())
-        self.btn_widgets.setSizePolicy(sizePolicy)
-        self.btn_widgets.setMinimumSize(QSize(0, 45))
-        self.btn_widgets.setFont(font)
-        self.btn_widgets.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_widgets.setLayoutDirection(Qt.LeftToRight)
-        self.btn_widgets.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-gamepad.png);")
-
-        self.verticalLayout_8.addWidget(self.btn_widgets)
 
 
         self.verticalMenuLayout.addWidget(self.topMenu, 0, Qt.AlignTop)
@@ -912,12 +863,12 @@ class Ui_MainWindow(object):
         sizePolicy2.setHeightForWidth(self.titleRightInfo.sizePolicy().hasHeightForWidth())
         self.titleRightInfo.setSizePolicy(sizePolicy2)
         self.titleRightInfo.setMaximumSize(QSize(16777215, 45))
-        font3 = QFont()
-        font3.setFamilies([u"Segoe UI"])
-        font3.setPointSize(10)
-        font3.setBold(True)
-        font3.setItalic(False)
-        self.titleRightInfo.setFont(font3)
+        font1 = QFont()
+        font1.setFamilies([u"Segoe UI"])
+        font1.setPointSize(10)
+        font1.setBold(True)
+        font1.setItalic(False)
+        self.titleRightInfo.setFont(font1)
         self.titleRightInfo.setStyleSheet(u"font-weight: bold;")
         self.titleRightInfo.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
@@ -963,13 +914,13 @@ class Ui_MainWindow(object):
         self.maximizeRestoreAppBtn.setObjectName(u"maximizeRestoreAppBtn")
         self.maximizeRestoreAppBtn.setMinimumSize(QSize(28, 28))
         self.maximizeRestoreAppBtn.setMaximumSize(QSize(28, 28))
-        font4 = QFont()
-        font4.setFamilies([u"Segoe UI"])
-        font4.setPointSize(10)
-        font4.setBold(False)
-        font4.setItalic(False)
-        font4.setStyleStrategy(QFont.PreferDefault)
-        self.maximizeRestoreAppBtn.setFont(font4)
+        font2 = QFont()
+        font2.setFamilies([u"Segoe UI"])
+        font2.setPointSize(10)
+        font2.setBold(False)
+        font2.setItalic(False)
+        font2.setStyleStrategy(QFont.PreferDefault)
+        self.maximizeRestoreAppBtn.setFont(font2)
         self.maximizeRestoreAppBtn.setCursor(QCursor(Qt.PointingHandCursor))
         icon3 = QIcon()
         icon3.addFile(u":/icons/images/icons/icon_maximize.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -1028,9 +979,7 @@ class Ui_MainWindow(object):
         self.stackedWidget.setMidLineWidth(0)
         self.home = QWidget()
         self.home.setObjectName(u"home")
-        self.home.setStyleSheet(u"background-image: url(:/images/images/images/PyDracula_vertical.png);\n"
-"background-position: center;\n"
-"background-repeat: no-repeat;")
+        self.home.setStyleSheet(u"")
         self.stackedWidget.addWidget(self.home)
         self.widgets = QWidget()
         self.widgets.setObjectName(u"widgets")
@@ -1173,7 +1122,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 344, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1263,10 +1212,10 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         if (self.tableWidget.rowCount() < 16):
             self.tableWidget.setRowCount(16)
-        font5 = QFont()
-        font5.setFamilies([u"Segoe UI"])
+        font3 = QFont()
+        font3.setFamilies([u"Segoe UI"])
         __qtablewidgetitem4 = QTableWidgetItem()
-        __qtablewidgetitem4.setFont(font5);
+        __qtablewidgetitem4.setFont(font3);
         self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem5)
@@ -1388,7 +1337,7 @@ class Ui_MainWindow(object):
         sizePolicy4.setVerticalStretch(0)
         sizePolicy4.setHeightForWidth(self.startTimerButton.sizePolicy().hasHeightForWidth())
         self.startTimerButton.setSizePolicy(sizePolicy4)
-        self.startTimerButton.setFont(font3)
+        self.startTimerButton.setFont(font1)
         self.startTimerButton.setMouseTracking(True)
         self.startTimerButton.setStyleSheet(u"border: 1px solid #515A63;\n"
 "font-weight: bold;\n"
@@ -1412,7 +1361,7 @@ class Ui_MainWindow(object):
         self.stopTimerButton.setGeometry(QRect(1010, 0, 121, 41))
         sizePolicy4.setHeightForWidth(self.stopTimerButton.sizePolicy().hasHeightForWidth())
         self.stopTimerButton.setSizePolicy(sizePolicy4)
-        self.stopTimerButton.setFont(font3)
+        self.stopTimerButton.setFont(font1)
         self.stopTimerButton.setMouseTracking(True)
         self.stopTimerButton.setStyleSheet(u"border: 1px solid #515A63;\n"
 "font-weight: bold;\n"
@@ -1577,11 +1526,11 @@ class Ui_MainWindow(object):
         self.creditsLabel = QLabel(self.bottomBar)
         self.creditsLabel.setObjectName(u"creditsLabel")
         self.creditsLabel.setMaximumSize(QSize(16777215, 16))
-        font6 = QFont()
-        font6.setFamilies([u"Segoe UI"])
-        font6.setBold(False)
-        font6.setItalic(False)
-        self.creditsLabel.setFont(font6)
+        font4 = QFont()
+        font4.setFamilies([u"Segoe UI"])
+        font4.setBold(False)
+        font4.setItalic(False)
+        self.creditsLabel.setFont(font4)
         self.creditsLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_5.addWidget(self.creditsLabel)
@@ -1617,7 +1566,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(2)
+        self.stackedWidget.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1625,12 +1574,9 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.titleLeftApp.setText(QCoreApplication.translate("MainWindow", u"PyDracula", None))
-        self.titleLeftDescription.setText(QCoreApplication.translate("MainWindow", u"Modern GUI / Flat Style", None))
         self.toggleButton.setText(QCoreApplication.translate("MainWindow", u"Hide", None))
         self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Home", None))
         self.btn_new.setText(QCoreApplication.translate("MainWindow", u"New", None))
-        self.btn_widgets.setText(QCoreApplication.translate("MainWindow", u"Widgets", None))
         self.toggleLeftBox.setText(QCoreApplication.translate("MainWindow", u"Left Box", None))
         self.extraLabel.setText(QCoreApplication.translate("MainWindow", u"Left Box", None))
 #if QT_CONFIG(tooltip)

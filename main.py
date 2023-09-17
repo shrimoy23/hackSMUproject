@@ -93,7 +93,6 @@ class MainWindow(QMainWindow):
 
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.buttonClick)
-        widgets.btn_widgets.clicked.connect(self.buttonClick)
         widgets.btn_new.clicked.connect(self.buttonClick)
 
         # EXTRA LEFT BOX
@@ -351,12 +350,6 @@ class MainWindow(QMainWindow):
 
         if btnName == "btn_home":
             widgets.stackedWidget.setCurrentWidget(widgets.home)
-            UIFunctions.resetStyle(self, btnName)
-            btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
-            self.stop_video_feed()
-
-        if btnName == "btn_widgets":
-            widgets.stackedWidget.setCurrentWidget(widgets.widgets)
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
             self.stop_video_feed()
