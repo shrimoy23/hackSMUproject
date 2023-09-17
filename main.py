@@ -1,12 +1,15 @@
 import sys
 import os
 import platform
+
 import cv2
 import torch
 from ultralytics import YOLO
+import pygame
 
 from modules import *
 from widgets import *
+
 os.environ["QT_FONT_DPI"] = "96" # FIX Problem for High DPI and Scale above 100%
 
 # SET AS GLOBAL WIDGETS
@@ -22,7 +25,10 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
         
+        # Webcam
         self.cap = None # Webcam off as default
+        self.person_not_in_frame = 0 # Initialize counter for when person leaves
+        self.phone_in_frame = 0 # Initialize counter for cell phone detection
         
         # Time
         self.minute = 0
@@ -34,15 +40,15 @@ class MainWindow(QMainWindow):
 
         # Data Collection
         self.stopwatch_list = [] # Stores our list of stopwatch times
-
-        self.person_not_in_frame = 0 # Initialize counter for when person leaves
         self.person_not_in_frame_list = [] # Stores our list of person leaving frame frames
+        self.phone_in_frame_list = [] # Stores our list of phone being in camera
 
 
         widgets.startTimerButton.clicked.connect(self.start_timer) # Start Button
         widgets.stopTimerButton.clicked.connect(self.stop_timer) # Stop Button
         
         self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s') # YOLO model initialization
+        self.model.classes = [0, 67]
 
         # App Settings
         Settings.ENABLE_CUSTOM_TITLE_BAR = True
@@ -94,6 +100,14 @@ class MainWindow(QMainWindow):
         widgets.stackedWidget.setCurrentWidget(widgets.home)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
 
+    def play_alert_sound(self):
+        pygame.mixer.init()
+        pygame.mixer.music.load('radar.mp3')
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy():
+            pygame.time.Clock().tick(10)
+        pygame.mixer.quit()
+
     def start_timer(self):
         if self.timer_id:
             # If timer is already running, stop it first
@@ -139,15 +153,19 @@ class MainWindow(QMainWindow):
                 pred = results.pred[0] # Get the first prediction (in case of batch processing)
 
                 person_detected = False
+                phone_detected = False
 
                 # Step 2: Draw bounding boxes and labels on the frame
                 for det in pred:
-                    if det[4] > 0.3:  # Confidence threshold, can be adjusted
+                    if det[4] > 0.1:  # Confidence threshold, can be adjusted
                         x1, y1, x2, y2 = map(int, det[:4])
                         label_name = self.model.names[int(det[5])]
                         
                         if label_name == "person":
                             person_detected = True
+
+                        if label_name == "cell phone":
+                            phone_detected = True
 
                         label = f'{label_name} {det[4]:.2f}'
                         frame = cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)  # Draw a green rectangle
@@ -160,6 +178,24 @@ class MainWindow(QMainWindow):
                     self.person_not_in_frame = 0
                 else:
                     self.person_not_in_frame += 1
+
+                # Check if a cell phone was detected and increment counter
+                if phone_detected:
+                    self.phone_in_frame += 1
+                else:
+                    if self.phone_in_frame != 0:
+                        self.phone_in_frame_list.append(self.phone_in_frame)
+                    self.phone_in_frame = 0
+
+                # Check if cell phone has been in frame for more than 5 frames
+                if self.phone_in_frame > 5:
+                    self.play_alert_sound()
+                    self.phone_in_frame = 0  # Resetting the count after playing the sound.
+
+                # Check if a person has been away for more than 5 frames
+                if self.person_not_in_frame > 5:
+                    self.play_alert_sound()
+                    self.person_not_in_frame = 0  # Resetting the count after playing the sound.
 
                 # Step 3: Display the frame
                 rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -209,6 +245,7 @@ class MainWindow(QMainWindow):
             
             print(f"User's list where person leaves frame: {self.person_not_in_frame_list}")
             print(f"User's list of stopwatch times, stored in (minutes, seconds): {self.stopwatch_list}")
+            print(f"User's list of frames where cell phone is detected: {self.phone_in_frame_list}")
 
         if event.buttons() == Qt.RightButton:
             print('Mouse click: RIGHT CLICK')
