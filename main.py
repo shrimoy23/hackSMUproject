@@ -10,6 +10,9 @@ import pygame
 from modules import *
 from widgets import *
 
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.figure import Figure
+
 os.environ["QT_FONT_DPI"] = "96" # FIX Problem for High DPI and Scale above 100%
 
 # SET AS GLOBAL WIDGETS
@@ -228,6 +231,15 @@ class MainWindow(QMainWindow):
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
             self.start_video_feed()
+            x_axis = [1, 2, 8, 3, 6]
+            y_axis = [9, 3, 1, 6, 3]
+
+            fig = Figure(figsize = (6, 6))
+            ax = fig.add_subplot()
+            ax.plot(x_axis, y_axis)
+
+            canvas = FigureCanvas(fig)
+            widgets.productivityGraph.addWidget(canvas)
 
         print(f'Button "{btnName}" pressed!')
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainWeNRGo.ui'
+## Form generated from reading UI file 'mainbvYWAR.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.5.2
 ##
@@ -1167,7 +1167,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 353, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1196,6 +1196,7 @@ class Ui_MainWindow(object):
         self.comboBox.setFont(font)
         self.comboBox.setAutoFillBackground(False)
         self.comboBox.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+        self.comboBox.setEditable(False)
         self.comboBox.setIconSize(QSize(16, 16))
         self.comboBox.setFrame(True)
 
@@ -1424,6 +1425,12 @@ class Ui_MainWindow(object):
         self.configurationsLabel.setFrameShape(QFrame.Box)
         self.configurationsLabel.setLineWidth(1)
         self.configurationsLabel.setAlignment(Qt.AlignCenter)
+        self.verticalLayoutWidget = QWidget(self.new_page)
+        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(610, 190, 531, 211))
+        self.productivityGraph = QVBoxLayout(self.verticalLayoutWidget)
+        self.productivityGraph.setObjectName(u"productivityGraph")
+        self.productivityGraph.setContentsMargins(0, 0, 0, 0)
         self.stackedWidget.addWidget(self.new_page)
 
         self.verticalLayout_15.addWidget(self.stackedWidget)
