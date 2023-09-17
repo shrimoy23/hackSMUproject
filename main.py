@@ -27,6 +27,9 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         global widgets
         widgets = self.ui
+
+        # Flag for when we start timer
+        self.started = False
         
         # Webcam
         self.cap = None # Webcam off as default
@@ -51,7 +54,7 @@ class MainWindow(QMainWindow):
         widgets.stopTimerButton.clicked.connect(self.stop_timer) # Stop Button
         
         self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s') # YOLO model initialization
-        self.model.classes = [0, 67]
+        self.model.classes = [0, 67] # Classify only person (0) and cellphone (67)
 
         # App Settings
         Settings.ENABLE_CUSTOM_TITLE_BAR = True
@@ -118,6 +121,7 @@ class MainWindow(QMainWindow):
         
         self.timer_start_time = cv2.getTickCount()  # Get current tick count
         self.timer_id = self.startTimer(self.timer_update_interval)  # Start the timer
+        self.started = True
 
     def stop_timer(self):
         if self.timer_id:
@@ -127,6 +131,7 @@ class MainWindow(QMainWindow):
 
             self.stopwatch_list.append((self.minutes, self.seconds))
             self.minutes, self.seconds = 0, 0
+            self.started = False
         
     def start_video_feed(self):
         if self.cap is None:
@@ -158,24 +163,33 @@ class MainWindow(QMainWindow):
                 person_detected = False
                 phone_detected = False
 
+                # Get the status of the checkboxes
+                person_detection_enabled = widgets.personLabel.isChecked()
+                phone_detection_enabled = widgets.phoneLabel.isChecked()
+
                 # Step 2: Draw bounding boxes and labels on the frame
                 for det in pred:
                     if det[4] > 0.1:  # Confidence threshold, can be adjusted
                         x1, y1, x2, y2 = map(int, det[:4])
                         label_name = self.model.names[int(det[5])]
-                        
+                                        
+                        label = f'{label_name} {det[4]:.2f}'  # Move this line up here
+
                         if label_name == "person":
                             person_detected = True
-
-                        if label_name == "cell phone":
+                            # Only draw if the checkbox is checked
+                            if person_detection_enabled:
+                                frame = cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)  # Draw a green rectangle
+                                frame = cv2.putText(frame, label, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+                        elif label_name == "cell phone":
                             phone_detected = True
-
-                        label = f'{label_name} {det[4]:.2f}'
-                        frame = cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)  # Draw a green rectangle
-                        frame = cv2.putText(frame, label, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+                            # Only draw if the checkbox is checked
+                            if phone_detection_enabled:
+                                frame = cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)  # Draw a green rectangle
+                                frame = cv2.putText(frame, label, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 
                 # Check if a person was detected and reset or increment counter
-                if person_detected:
+                if person_detected and person_detection_enabled:
                     if self.person_not_in_frame != 0:
                         self.person_not_in_frame_list.append(self.person_not_in_frame)
                     self.person_not_in_frame = 0
@@ -183,7 +197,7 @@ class MainWindow(QMainWindow):
                     self.person_not_in_frame += 1
 
                 # Check if a cell phone was detected and increment counter
-                if phone_detected:
+                if phone_detected and phone_detection_enabled:
                     self.phone_in_frame += 1
                 else:
                     if self.phone_in_frame != 0:
@@ -191,12 +205,12 @@ class MainWindow(QMainWindow):
                     self.phone_in_frame = 0
 
                 # Check if cell phone has been in frame for more than 5 frames
-                if self.phone_in_frame > 5:
+                if (self.phone_in_frame > 5) and self.started:
                     self.play_alert_sound()
                     self.phone_in_frame = 0  # Resetting the count after playing the sound.
 
                 # Check if a person has been away for more than 5 frames
-                if self.person_not_in_frame > 5:
+                if (self.person_not_in_frame > 5) and self.started:
                     self.play_alert_sound()
                     self.person_not_in_frame = 0  # Resetting the count after playing the sound.
 
