@@ -37,6 +37,7 @@ class MainWindow(QMainWindow):
         self.cap = None # Webcam off as default
         self.person_not_in_frame = 0 # Initialize counter for when person leaves
         self.phone_in_frame = 0 # Initialize counter for cell phone detection
+        self.drowsiness = 0 # Initialize drowsiness meter
         
         # Time
         self.minute = 0
@@ -53,6 +54,8 @@ class MainWindow(QMainWindow):
         self.stopwatch_list = [] # Stores our list of stopwatch times
         self.person_not_in_frame_list = [] # Stores our list of person leaving frame frames
         self.phone_in_frame_list = [] # Stores our list of phone being in camera
+        self.drowsiness_list = [] # Stores list of drowsiness frames
+
         self.graph_status = True
         self.time_axis = None # Representation of time in the productivity graph
         self.productivity_axis = None # Productivity over time in the productivity graph
@@ -68,6 +71,9 @@ class MainWindow(QMainWindow):
         
         self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s') # YOLO model initialization
         self.model.classes = [0, 67] # Classify only person (0) and cellphone (67)
+
+        self.model_2 = torch.hub.load('ultralytics/yolov5', 'custom', path='drowsiness.pt', force_reload=True) # Drowsiness model initialization
+
 
         # App Settings
         Settings.ENABLE_CUSTOM_TITLE_BAR = True
@@ -227,12 +233,17 @@ class MainWindow(QMainWindow):
                 results = self.model(frame)  # Process the frame
                 pred = results.pred[0] # Get the first prediction (in case of batch processing)
 
+                results2 = self.model_2(frame) # Process drowsiness
+                pred2 = results2.pred[0]
+
                 person_detected = False
                 phone_detected = False
+                drowsiness_detected = False
 
                 # Get the status of the checkboxes
                 person_detection_enabled = widgets.personLabel.isChecked()
                 phone_detection_enabled = widgets.phoneLabel.isChecked()
+                drowsiness_enabled = widgets.drowsinessLabel.isChecked()
 
                 # Step 2: Draw bounding boxes and labels on the frame
                 for det in pred:
@@ -240,7 +251,7 @@ class MainWindow(QMainWindow):
                         x1, y1, x2, y2 = map(int, det[:4])
                         label_name = self.model.names[int(det[5])]
                                         
-                        label = f'{label_name} {det[4]:.2f}'  # Move this line up here
+                        label = f'{label_name} {det[4]:.2f}'  
 
                         if label_name == "person":
                             person_detected = True
@@ -252,8 +263,22 @@ class MainWindow(QMainWindow):
                             phone_detected = True
                             # Only draw if the checkbox is checked
                             if phone_detection_enabled:
-                                frame = cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)  # Draw a green rectangle
+                                frame = cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 0, 0), 2)  # Draw a green rectangle
                                 frame = cv2.putText(frame, label, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+
+                for det in pred2:
+                    if det[4] > 0.1:
+                        x1, y1, x2, y2 = map(int, det[:4])
+                        label_name = self.model_2.names[int(det[5])]
+                                    
+                        label = f'{label_name} {det[4]:.2f}'  
+
+                        if label_name == 'drowsy':
+                            drowsiness_detected = True
+                        if drowsiness_enabled:
+                                frame = cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 0, 255), 2)  # Draw a green rectangle
+                                frame = cv2.putText(frame, label, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+
 
                 # Check if a person was detected and reset or increment counter
                 if person_detected and person_detection_enabled:
@@ -278,6 +303,17 @@ class MainWindow(QMainWindow):
                         self.phone_in_frame_list.append(self.phone_in_frame)
                     self.phone_in_frame = 0
 
+                # Check if drowsiness detected and incremeent counter
+                if drowsiness_detected and drowsiness_enabled:
+                    self.drowsiness += 1
+                    if drowsiness_enabled:
+                        self.productivity_val -= 5
+                        self.final_drowsy_count += 1
+                else:
+                    if self.drowsiness != 0:
+                        self.drowsiness_list.append(self.drowsiness)
+                    self.drowsiness = 0
+
                 # Check if cell phone has been in frame for more than 5 frames
                 if (self.phone_in_frame > 5) and self.started:
                     self.play_alert_sound()
@@ -287,6 +323,11 @@ class MainWindow(QMainWindow):
                 if (self.person_not_in_frame > 5) and self.started:
                     self.play_alert_sound()
                     self.person_not_in_frame = 0  # Resetting the count after playing the sound.
+
+                # Check if a person has been drowsy for more than 5 frames
+                if (self.drowsiness > 15) and self.started:
+                    self.play_alert_sound()
+                    self.drowsiness = 0
 
                 # Step 3: Display the frame
                 rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
