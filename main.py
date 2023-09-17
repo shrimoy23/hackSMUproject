@@ -21,41 +21,44 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
         global widgets
         widgets = self.ui
+        
+        self.cap = None # Webcam off as default
+        
+        # Time
+        self.minute = 0
+        self.seconds = 0
 
-        # Webcam off as default
-        self.cap = None
-
-        # Initialize timer variables
         self.timer_start_time = None  # Time when the timer was started
         self.timer_update_interval = 1000  # Update every second
         self.timer_id = None  # ID of the timer
 
-        # Connect start timer button to method
-        widgets.startTimerButton.clicked.connect(self.start_timer)
-        widgets.stopTimerButton.clicked.connect(self.stop_timer)
-        # YOLO model initialization
-        self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
+        # Data Collection
+        self.stopwatch_list = [] # Stores our list of stopwatch times
 
-        # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
+        self.person_not_in_frame = 0 # Initialize counter for when person leaves
+        self.person_not_in_frame_list = [] # Stores our list of person leaving frame frames
+
+
+        widgets.startTimerButton.clicked.connect(self.start_timer) # Start Button
+        widgets.stopTimerButton.clicked.connect(self.stop_timer) # Stop Button
+        
+        self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s') # YOLO model initialization
+
+        # App Settings
         Settings.ENABLE_CUSTOM_TITLE_BAR = True
-
-        # APP NAME
-        title = "PyDracula - Modern GUI"
-        description = "PyDracula APP - Theme with colors based on Dracula for Python."
-        # APPLY TEXTS
+        title = "FocusGuardian"
+        description = "FocusGuardian - AI driven solutions to help you ace more exams."
         self.setWindowTitle(title)
         widgets.titleRightInfo.setText(description)
 
-        # TOGGLE MENU
-        widgets.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
+        widgets.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True)) # TOGGLE MENU
 
-        # SET UI DEFINITIONS
-        UIFunctions.uiDefinitions(self)
+        UIFunctions.uiDefinitions(self) # SET UI DEFINITIONS
 
-        # QTableWidget PARAMETERS
-        widgets.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
+        widgets.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch) # QTableWidget PARAMETERS
 
-        # BUTTONS CLICK
+
+        ### BUTTONS CLICK ###
 
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.buttonClick)
@@ -73,8 +76,7 @@ class MainWindow(QMainWindow):
             UIFunctions.toggleRightBox(self, True)
         widgets.settingsTopBtn.clicked.connect(openCloseRightBox)
 
-        # SHOW APP
-        self.show()
+        self.show() # SHOW APP
 
         # SET CUSTOM THEME
         useCustomTheme = False
@@ -105,9 +107,10 @@ class MainWindow(QMainWindow):
             self.killTimer(self.timer_id)
             self.timer_id = None
             widgets.timerLabel.setText("00:00")
-        
 
-    # Webcam Functionality
+            self.stopwatch_list.append((self.minutes, self.seconds))
+            self.minutes, self.seconds = 0, 0
+        
     def start_video_feed(self):
         if self.cap is None:
             self.cap = cv2.VideoCapture(0)
@@ -125,77 +128,88 @@ class MainWindow(QMainWindow):
         if event.timerId() == self.timer_id:
             # Timer event for our timer
             elapsed_ticks = cv2.getTickCount() - self.timer_start_time
-            elapsed_time = elapsed_ticks / cv2.getTickFrequency()  # Convert to seconds
-            minutes, seconds = divmod(elapsed_time, 60)
-            widgets.timerLabel.setText(f"{int(minutes):02d}:{int(seconds):02d}")
+            elapsed_time = elapsed_ticks / cv2.getTickFrequency() # Convert to seconds
+            self.minutes, self.seconds = divmod(elapsed_time, 60)
+            widgets.timerLabel.setText(f"{int(self.minutes):02d}:{int(self.seconds):02d}")
         else:
             ret, frame = self.cap.read()
             if ret:
                 # Step 1: Process frame with YOLOv5
                 results = self.model(frame)  # Process the frame
-                pred = results.pred[0]       # Get the first prediction (in case of batch processing)
+                pred = results.pred[0] # Get the first prediction (in case of batch processing)
+
+                person_detected = False
 
                 # Step 2: Draw bounding boxes and labels on the frame
                 for det in pred:
                     if det[4] > 0.3:  # Confidence threshold, can be adjusted
                         x1, y1, x2, y2 = map(int, det[:4])
-                        label = f'{self.model.names[int(det[5])]} {det[4]:.2f}'
+                        label_name = self.model.names[int(det[5])]
+                        
+                        if label_name == "person":
+                            person_detected = True
+
+                        label = f'{label_name} {det[4]:.2f}'
                         frame = cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)  # Draw a green rectangle
                         frame = cv2.putText(frame, label, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+
+                # Check if a person was detected and reset or increment counter
+                if person_detected:
+                    if self.person_not_in_frame != 0:
+                        self.person_not_in_frame_list.append(self.person_not_in_frame)
+                    self.person_not_in_frame = 0
+                else:
+                    self.person_not_in_frame += 1
 
                 # Step 3: Display the frame
                 rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 h, w, ch = rgb_image.shape
                 bytes_per_line = ch * w
                 convert_to_Qt_format = QImage(rgb_image.data, w, h, bytes_per_line, QImage.Format.Format_RGB888)
-                p = convert_to_Qt_format.scaled(640, 480, Qt.AspectRatioMode.KeepAspectRatio)
-                widgets.label.setPixmap(QPixmap.fromImage(p))
+                p = convert_to_Qt_format.scaled(533, 400, Qt.AspectRatioMode.KeepAspectRatio)
+                widgets.videoLabel.setPixmap(QPixmap.fromImage(p))
 
     # BUTTONS CLICK
-    # Post here your functions for clicked buttons
     def buttonClick(self):
         # GET BUTTON CLICKED
         btn = self.sender()
         btnName = btn.objectName()
 
-        # SHOW HOME PAGE
         if btnName == "btn_home":
             widgets.stackedWidget.setCurrentWidget(widgets.home)
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
             self.stop_video_feed()
 
-        # SHOW WIDGETS PAGE
         if btnName == "btn_widgets":
             widgets.stackedWidget.setCurrentWidget(widgets.widgets)
             UIFunctions.resetStyle(self, btnName)
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
             self.stop_video_feed()
 
-        # SHOW NEW PAGE
         if btnName == "btn_new":
             widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
             self.start_video_feed()
 
-        # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
 
 
     # RESIZE EVENTS
     def resizeEvent(self, event):
-        # Update Size Grips
-        UIFunctions.resize_grips(self)
+        UIFunctions.resize_grips(self) # Update Size Grips
 
     # MOUSE CLICK EVENTS
     def mousePressEvent(self, event):
-        # SET DRAG POS WINDOW
-        self.dragPos = event.globalPos()
+        self.dragPos = event.globalPos() # SET DRAG POS WINDOW
 
-        # PRINT MOUSE EVENTS
         if event.buttons() == Qt.LeftButton:
             print('Mouse click: LEFT CLICK')
+            
+            print(f"User's list where person leaves frame: {self.person_not_in_frame_list}")
+            print(f"User's list of stopwatch times, stored in (minutes, seconds): {self.stopwatch_list}")
+
         if event.buttons() == Qt.RightButton:
             print('Mouse click: RIGHT CLICK')
 

@@ -1514,7 +1514,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    </font>
                   </property>
                   <property name="text">
-                   <string>PyDracula APP - Theme with colors based on Dracula for Python.</string>
+                   <string>FocusGuardian</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -1796,6 +1796,15 @@ li.checked::marker { content: &quot;\2612&quot;; }
                      </property>
                      <property name="styleSheet">
                       <string notr="true">background: transparent;</string>
+                     </property>
+                     <property name="frameShape">
+                      <enum>QFrame::NoFrame</enum>
+                     </property>
+                     <property name="lineWidth">
+                      <number>1</number>
+                     </property>
+                     <property name="midLineWidth">
+                      <number>0</number>
                      </property>
                      <property name="currentIndex">
                       <number>2</number>
@@ -2148,6 +2157,9 @@ background-repeat: no-repeat;</string>
                               </property>
                               <property name="styleSheet">
                                <string notr="true">background-color: rgb(33, 37, 43);</string>
+                              </property>
+                              <property name="editable">
+                               <bool>false</bool>
                               </property>
                               <property name="iconSize">
                                <size>
@@ -2659,8 +2671,8 @@ background-repeat: no-repeat;</string>
                       <widget class="QPushButton" name="startTimerButton">
                        <property name="geometry">
                         <rect>
-                         <x>660</x>
-                         <y>10</y>
+                         <x>880</x>
+                         <y>0</y>
                          <width>121</width>
                          <height>41</height>
                         </rect>
@@ -2689,8 +2701,8 @@ background-repeat: no-repeat;</string>
                       <widget class="QLabel" name="timerLabel">
                        <property name="geometry">
                         <rect>
-                         <x>660</x>
-                         <y>70</y>
+                         <x>880</x>
+                         <y>60</y>
                          <width>251</width>
                          <height>91</height>
                         </rect>
@@ -2707,7 +2719,10 @@ background-repeat: no-repeat;</string>
                         <enum>Qt::LeftToRight</enum>
                        </property>
                        <property name="frameShape">
-                        <enum>QFrame::Box</enum>
+                        <enum>QFrame::StyledPanel</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Plain</enum>
                        </property>
                        <property name="text">
                         <string>00:00</string>
@@ -2716,23 +2731,23 @@ background-repeat: no-repeat;</string>
                         <set>Qt::AlignCenter</set>
                        </property>
                       </widget>
-                      <widget class="QLabel" name="label">
+                      <widget class="QLabel" name="videoLabel">
                        <property name="geometry">
                         <rect>
-                         <x>10</x>
-                         <y>10</y>
-                         <width>640</width>
-                         <height>480</height>
+                         <x>50</x>
+                         <y>0</y>
+                         <width>533</width>
+                         <height>400</height>
                         </rect>
                        </property>
                        <property name="layoutDirection">
                         <enum>Qt::LeftToRight</enum>
                        </property>
                        <property name="frameShape">
-                        <enum>QFrame::Box</enum>
+                        <enum>QFrame::StyledPanel</enum>
                        </property>
                        <property name="text">
-                        <string>NEW PAGE TEST</string>
+                        <string>Webcam</string>
                        </property>
                        <property name="textFormat">
                         <enum>Qt::AutoText</enum>
@@ -2744,8 +2759,8 @@ background-repeat: no-repeat;</string>
                       <widget class="QPushButton" name="stopTimerButton">
                        <property name="geometry">
                         <rect>
-                         <x>790</x>
-                         <y>10</y>
+                         <x>1010</x>
+                         <y>0</y>
                          <width>121</width>
                          <height>41</height>
                         </rect>
@@ -2769,6 +2784,85 @@ background-repeat: no-repeat;</string>
                        </property>
                        <property name="text">
                         <string>Stop Timer</string>
+                       </property>
+                      </widget>
+                      <widget class="QCheckBox" name="personLabel">
+                       <property name="geometry">
+                        <rect>
+                         <x>610</x>
+                         <y>70</y>
+                         <width>251</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="autoFillBackground">
+                        <bool>false</bool>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="text">
+                        <string>Person Detection</string>
+                       </property>
+                      </widget>
+                      <widget class="QCheckBox" name="phoneLabel">
+                       <property name="geometry">
+                        <rect>
+                         <x>610</x>
+                         <y>100</y>
+                         <width>251</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="autoFillBackground">
+                        <bool>false</bool>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="text">
+                        <string>Phone Detection</string>
+                       </property>
+                      </widget>
+                      <widget class="QCheckBox" name="drowsinessLabel">
+                       <property name="geometry">
+                        <rect>
+                         <x>610</x>
+                         <y>130</y>
+                         <width>251</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="autoFillBackground">
+                        <bool>false</bool>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="text">
+                        <string>Drowsiness Detection</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="configurationsLabel">
+                       <property name="geometry">
+                        <rect>
+                         <x>610</x>
+                         <y>0</y>
+                         <width>251</width>
+                         <height>41</height>
+                        </rect>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::Box</enum>
+                       </property>
+                       <property name="lineWidth">
+                        <number>1</number>
+                       </property>
+                       <property name="text">
+                        <string>Configurations</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
                        </property>
                       </widget>
                      </widget>
@@ -3050,7 +3144,7 @@ background-repeat: no-repeat;</string>
                    </font>
                   </property>
                   <property name="text">
-                   <string>By: Wanderson M. Pimenta</string>
+                   <string>By: Elvin Li, Shrimoy Satpathy, Vishnu Nambiar, Akshat Sharma</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -3060,7 +3154,7 @@ background-repeat: no-repeat;</string>
                 <item>
                  <widget class="QLabel" name="version">
                   <property name="text">
-                   <string>v1.0.3</string>
+                   <string>v1.0</string>
                   </property>
                   <property name="alignment">
                    <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
