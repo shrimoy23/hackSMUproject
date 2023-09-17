@@ -12,6 +12,8 @@ from widgets import *
 
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 os.environ["QT_FONT_DPI"] = "96" # FIX Problem for High DPI and Scale above 100%
 
@@ -51,7 +53,12 @@ class MainWindow(QMainWindow):
         self.stopwatch_list = [] # Stores our list of stopwatch times
         self.person_not_in_frame_list = [] # Stores our list of person leaving frame frames
         self.phone_in_frame_list = [] # Stores our list of phone being in camera
-
+        self.graph_status = True
+        self.time_axis = None # Representation of time in the productivity graph
+        self.productivity_axis = None # Productivity over time in the productivity graph
+        self.productivity_val = 100
+        sns.set_theme()
+        sns.set_context("paper")
 
         widgets.startTimerButton.clicked.connect(self.start_timer) # Start Button
         widgets.stopTimerButton.clicked.connect(self.stop_timer) # Stop Button
@@ -136,6 +143,31 @@ class MainWindow(QMainWindow):
         while pygame.mixer.music.get_busy():
             pygame.time.Clock().tick(10)
         pygame.mixer.quit()
+    
+    def updated_graph(self, productivity_val):
+        fig = Figure(figsize = (529, 209))
+        ax = fig.add_subplot()
+        fig.set_facecolor('white')
+        if self.time_axis != None:
+            self.time_axis.append(self.time_axis[-1] + 1)
+        else:
+            self.time_axis = [1]
+        if self.productivity_axis != None:
+            self.productivity_axis.append(productivity_val)
+        else:
+            self.productivity_axis = [productivity_val]
+        ax.plot(self.time_axis, self.productivity_axis, color='red')
+        ax.set_facecolor('none')
+        canvas = FigureCanvas(fig)
+        
+        widgets.productivityGraph.takeAt(0)
+        widgets.productivityGraph.addWidget(canvas)
+        
+    def remove_graph(self):
+        widgets.productivityGraph.takeAt(0)
+        self.time_axis = None
+        self.productivity_axis = None
+	
 
     def start_timer(self):
         if self.timer_id:
@@ -219,10 +251,15 @@ class MainWindow(QMainWindow):
                     self.person_not_in_frame = 0
                 else:
                     self.person_not_in_frame += 1
+                    if person_detection_enabled:
+                        self.productivity_val -= 5
+
 
                 # Check if a cell phone was detected and increment counter
                 if phone_detected and phone_detection_enabled:
                     self.phone_in_frame += 1
+                    if phone_detection_enabled:
+                        self.productivity_val -= 5
                 else:
                     if self.phone_in_frame != 0:
                         self.phone_in_frame_list.append(self.phone_in_frame)
@@ -245,6 +282,12 @@ class MainWindow(QMainWindow):
                 convert_to_Qt_format = QImage(rgb_image.data, w, h, bytes_per_line, QImage.Format.Format_RGB888)
                 p = convert_to_Qt_format.scaled(533, 400, Qt.AspectRatioMode.KeepAspectRatio)
                 widgets.videoLabel.setPixmap(QPixmap.fromImage(p))
+        # Update Graph Here:
+        if self.started:
+            self.updated_graph(self.productivity_val)
+            if self.productivity_val <= 100:
+                self.productivity_val += 1
+
 
     # BUTTONS CLICK
     def buttonClick(self):
@@ -269,15 +312,6 @@ class MainWindow(QMainWindow):
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
             self.start_video_feed()
-            x_axis = [1, 2, 8, 3, 6]
-            y_axis = [9, 3, 1, 6, 3]
-
-            fig = Figure(figsize = (6, 6))
-            ax = fig.add_subplot()
-            ax.plot(x_axis, y_axis)
-
-            canvas = FigureCanvas(fig)
-            widgets.productivityGraph.addWidget(canvas)
 
         print(f'Button "{btnName}" pressed!')
 
