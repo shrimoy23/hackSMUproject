@@ -99,7 +99,7 @@ class MainWindow(QMainWindow):
         self.show() # SHOW APP
 
         # SET CUSTOM THEME
-        useCustomTheme = True
+        useCustomTheme = False
         themeFile = "themes\py_dracula_dark.qss"
 
         # SET THEME AND HACKS

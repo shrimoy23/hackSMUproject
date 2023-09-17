@@ -1605,6 +1605,46 @@ li.checked::marker { content: &quot;\2612&quot;; }
                       <property name="styleSheet">
                        <string notr="true"/>
                       </property>
+                      <widget class="QLabel" name="label">
+                       <property name="geometry">
+                        <rect>
+                         <x>450</x>
+                         <y>110</y>
+                         <width>311</width>
+                         <height>191</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string/>
+                       </property>
+                       <property name="pixmap">
+                        <pixmap>images/images/logo.png</pixmap>
+                       </property>
+                       <property name="scaledContents">
+                        <bool>true</bool>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_2">
+                       <property name="geometry">
+                        <rect>
+                         <x>560</x>
+                         <y>270</y>
+                         <width>261</width>
+                         <height>71</height>
+                        </rect>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Segoe UI</family>
+                         <pointsize>10</pointsize>
+                         <italic>false</italic>
+                         <bold>false</bold>
+                        </font>
+                       </property>
+                       <property name="text">
+                        <string>FocusGuardian</string>
+                       </property>
+                      </widget>
                      </widget>
                      <widget class="QWidget" name="widgets">
                       <property name="styleSheet">
@@ -1901,7 +1941,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>344</width>
+                                 <width>353</width>
                                  <height>218</height>
                                 </rect>
                                </property>

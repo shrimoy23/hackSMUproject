@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainDqhfjD.ui'
+## Form generated from reading UI file 'mainzDZkZw.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.5.2
 ##
@@ -956,6 +956,15 @@ class Ui_MainWindow(object):
         self.home = QWidget()
         self.home.setObjectName(u"home")
         self.home.setStyleSheet(u"")
+        self.label = QLabel(self.home)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(450, 110, 311, 191))
+        self.label.setPixmap(QPixmap(u"images/images/logo.png"))
+        self.label.setScaledContents(True)
+        self.label_2 = QLabel(self.home)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setGeometry(QRect(560, 270, 261, 71))
+        self.label_2.setFont(font)
         self.stackedWidget.addWidget(self.home)
         self.widgets = QWidget()
         self.widgets.setObjectName(u"widgets")
@@ -1098,7 +1107,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 344, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 353, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1591,6 +1600,8 @@ class Ui_MainWindow(object):
         self.closeAppBtn.setToolTip(QCoreApplication.translate("MainWindow", u"Close", None))
 #endif // QT_CONFIG(tooltip)
         self.closeAppBtn.setText("")
+        self.label.setText("")
+        self.label_2.setText(QCoreApplication.translate("MainWindow", u"FocusGuardian", None))
         self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"FILE BOX", None))
         self.lineEdit.setText("")
         self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
