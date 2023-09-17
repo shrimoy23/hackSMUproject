@@ -1941,7 +1941,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>353</width>
+                                 <width>218</width>
                                  <height>218</height>
                                 </rect>
                                </property>
@@ -2745,7 +2745,7 @@ border-radius: 5px;</string>
                         <bool>true</bool>
                        </property>
                        <property name="digitCount">
-                        <number>8</number>
+                        <number>5</number>
                        </property>
                        <property name="mode">
                         <enum>QLCDNumber::Dec</enum>

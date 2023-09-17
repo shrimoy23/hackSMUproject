@@ -20,4 +20,4 @@ class AppFunctions(MainWindow):
         self.ui.comboBox.setStyleSheet("background-color: #6272a4;")
         self.ui.horizontalScrollBar.setStyleSheet("background-color: #6272a4;")
         self.ui.verticalScrollBar.setStyleSheet("background-color: #6272a4;")
-        self.ui.commandLinkButton.setStyleSheet("color: #ff79c6;")
+        self.ui.commandLinkButton.setStyleSheet("color: #76ACDB;")

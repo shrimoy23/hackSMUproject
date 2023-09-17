@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainMDdIID.ui'
+## Form generated from reading UI file 'mainglHWpM.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.2
+## Created by: Qt User Interface Compiler version 6.4.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -60,7 +60,7 @@ class Ui_MainWindow(object):
 "	background-position: left center;\n"
 "    background-repeat: no-repeat;\n"
 "	border: none;\n"
-"	border-left: 2px solid rgb(255, 121, 198);\n"
+"	border-left: 2px solid #76acdb;\n"
 "	text-align: left;\n"
 "	padding-left: 8px;\n"
 "	margin: 0px;\n"
@@ -86,7 +86,7 @@ class Ui_MainWindow(object):
 "	background-repeat: no-repeat;\n"
 "}\n"
 "#titleLeftApp { font: 63 12pt \"Segoe UI Semibold\"; }\n"
-"#titleLeftDescription { font: 8pt \"Segoe UI\"; color: rgb(189, 147, 249); }\n"
+"#titleLeftDescription { font: 8pt \"Segoe UI\"; color: rgb(85, 170, 255); }\n"
 "\n"
 "/* MENUS */\n"
 "#topMenu .QPushButton {	\n"
@@ -119,7 +119,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(40, 44, 52);\n"
 "}\n"
 "#bottomMenu .QPushButton:pressed {	\n"
-"	background-color: rgb(189, 147, 249);\n"
+"	background-color: rgb(85, 170, 255);\n"
 "	color: rgb(255, 255, 255);\n"
 "}\n"
 "#leftMenuFrame{\n"
@@ -142,7 +142,7 @@ class Ui_MainWindow(object):
 "}\n"
 "#toggleButton:pressed {\n"
 "	background-color: rgb("
-                        "189, 147, 249);\n"
+                        "85, 170, 255);\n"
 "}\n"
 "\n"
 "/* Title Menu */\n"
@@ -155,7 +155,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(44, 49, 58);\n"
 "}\n"
 "#extraTopBg{	\n"
-"	background-color: rgb(189, 147, 249)\n"
+"	background-color: rgb(85, 170, 255)\n"
 "}\n"
 "\n"
 "/* Icon */\n"
@@ -193,7 +193,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(40, 44, 52);\n"
 "}\n"
 "#extraTopMenu .QPushButton:pressed {	\n"
-"	background-color: rgb(189, 147, 249);\n"
+"	background-color: rgb(85, 170, 255);\n"
 "	color: rgb(255, 255, 255);\n"
 "}\n"
 "\n"
@@ -214,7 +214,7 @@ class Ui_MainWindow(object):
 "\n"
 "/* Theme Settings */\n"
 "#extraRightBox { background-color: rgb(44, 49, 58); }\n"
-"#themeSettingsTopDetail { background-color: rgb(189, 147, 249); }\n"
+"#themeSettingsTopDetail { background-color: rgb(85, 170, 255); }\n"
 "\n"
 "/* Bottom Bar */\n"
 "#bottomBar { background-color: rgb(44, 49, 58); }\n"
@@ -235,7 +235,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(40, 44, 52);\n"
 "}\n"
 "#contentSettings .QPushButton:pressed {	\n"
-"	background-color: rgb(189, 147, 249);\n"
+"	background-color: rgb(85, 170, 255);\n"
 "	color: rgb"
                         "(255, 255, 255);\n"
 "}\n"
@@ -256,7 +256,7 @@ class Ui_MainWindow(object):
 "	gridline-color: rgb(44, 49, 60);\n"
 "}\n"
 "QTableWidget::item:selected{\n"
-"	background-color: rgb(189, 147, 249);\n"
+"	background-color: rgb(85, 170, 255);\n"
 "}\n"
 "QHeaderView::section{\n"
 "	background-color: rgb(33, 37, 43);\n"
@@ -291,7 +291,7 @@ class Ui_MainWindow(object):
 "	border: 2px solid rgb(33, 37, 43);\n"
 "	padding-left: 10px;\n"
 "	selection-color: rgb(255, 255, 255);\n"
-"	selection-background-color: rgb(64, 71, 88);\n"
+"	selection-background-color: rgb(255, 121, 198);\n"
 "}\n"
 "QLineEdit:hover {\n"
 "	border: 2px solid rgb(64, 71, 88);\n"
@@ -327,13 +327,13 @@ class Ui_MainWindow(object):
 "ScrollBars */\n"
 "QScrollBar:horizontal {\n"
 "    border: none;\n"
-"    background: rgb(52, 59, 72);\n"
+"    background: #76acdb;\n"
 "    height: 8px;\n"
 "    margin: 0px 21px 0 21px;\n"
 "	border-radius: 0px;\n"
 "}\n"
 "QScrollBar::handle:horizontal {\n"
-"    background: rgb(189, 147, 249);\n"
+"    background: rgb(85, 170, 255);\n"
 "    min-width: 25px;\n"
 "	border-radius: 4px\n"
 "}\n"
@@ -372,7 +372,7 @@ class Ui_MainWindow(object):
 "	border-radius: 0px;\n"
 " }\n"
 " QScrollBar::handle:vertical {	\n"
-"	background: rgb(189, 147, 249);\n"
+"	background: rgb(85, 170, 255);\n"
 "    min-height: 25px;\n"
 "	border-radius: 4px\n"
 " }\n"
@@ -457,7 +457,7 @@ class Ui_MainWindow(object):
                         "ntrol-position: top right;\n"
 "	width: 25px; \n"
 "	border-left-width: 3px;\n"
-"	border-left-color: rgba(39, 44, 54, 150);\n"
+"	border-left-color: #76acdb;\n"
 "	border-left-style: solid;\n"
 "	border-top-right-radius: 3px;\n"
 "	border-bottom-right-radius: 3px;	\n"
@@ -484,7 +484,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(55, 62, 76);\n"
 "}\n"
 "QSlider::handle:horizontal {\n"
-"    background-color: rgb(189, 147, 249);\n"
+"    background-color: rgb(85, 170, 255);\n"
 "    border: none;\n"
 "    h"
                         "eight: 10px;\n"
@@ -496,7 +496,7 @@ class Ui_MainWindow(object):
 "    background-color: rgb(195, 155, 255);\n"
 "}\n"
 "QSlider::handle:horizontal:pressed {\n"
-"    background-color: rgb(255, 121, 198);\n"
+"    background-color: #76acdb;\n"
 "}\n"
 "\n"
 "QSlider::groove:vertical {\n"
@@ -509,7 +509,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(55, 62, 76);\n"
 "}\n"
 "QSlider::handle:vertical {\n"
-"    background-color: rgb(189, 147, 249);\n"
+"    background-color: rgb(85, 170, 255);\n"
 "	border: none;\n"
 "    height: 10px;\n"
 "    width: 10px;\n"
@@ -537,7 +537,7 @@ class Ui_MainWindow(object):
 "	background-color: rgb(44, 49, 60);\n"
 "}\n"
 "QCommandLinkButton:pressed {	\n"
-"	color: rgb(189, 147, 249);\n"
+"	color: rgb(85, 170, 255);\n"
 "	background-color: rgb(52, 58, 71);\n"
 "}\n"
 "\n"
@@ -1107,7 +1107,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 353, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1405,7 +1405,7 @@ class Ui_MainWindow(object):
 "border-radius: 5px;")
         self.timerLabel.setFrameShadow(QFrame.Plain)
         self.timerLabel.setSmallDecimalPoint(True)
-        self.timerLabel.setDigitCount(8)
+        self.timerLabel.setDigitCount(5)
         self.timerLabel.setMode(QLCDNumber.Dec)
         self.timerLabel.setSegmentStyle(QLCDNumber.Flat)
         self.timerLabel.setProperty("value", 0.000000000000000)

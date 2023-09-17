@@ -24,6 +24,8 @@ class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
 
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
         # SET AS GLOBAL WIDGETS
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -33,6 +35,12 @@ class MainWindow(QMainWindow):
         # Flag for when we start timer
         self.started = False
         
+        self.frame_skip = 2
+        self.frame_count = 0
+
+        self.graph_frame_count = 0
+        self.graph_frame_skip = 5  # Update the graph every 5 frames
+
         # Webcam
         self.cap = None # Webcam off as default
         self.person_not_in_frame = 0 # Initialize counter for when person leaves
@@ -42,13 +50,12 @@ class MainWindow(QMainWindow):
         # Time
         self.minute = 0
         self.seconds = 0
-        self.milliseconds = 0
 
         self.timer_start_time = None  # Time when the timer was started
         self.timer_update_interval = 1  # Update every second
         self.timer_id = None  # ID of the timer
 
-        widgets.timerLabel.display("00:00:00")
+        widgets.timerLabel.display("00:00")
 
         # Data Collection
         self.stopwatch_list = [] # Stores our list of stopwatch times
@@ -69,11 +76,17 @@ class MainWindow(QMainWindow):
         widgets.startTimerButton.clicked.connect(self.start_timer) # Start Button
         widgets.stopTimerButton.clicked.connect(self.stop_timer) # Stop Button
         
-        self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s') # YOLO model initialization
-        self.model.classes = [0, 67] # Classify only person (0) and cellphone (67)
 
-        self.model_2 = torch.hub.load('ultralytics/yolov5', 'custom', path='drowsiness.pt', force_reload=True) # Drowsiness model initialization
+        self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s').to(self.device)
+        self.model.classes = [0, 67]
+        self.model_2 = torch.hub.load('ultralytics/yolov5', 'custom', path='drowsiness.pt', force_reload=True).to(self.device)
+        self.model.to('cuda')
+        self.model_2.to('cuda')
 
+
+        print(torch.cuda.is_available())
+        print(torch.cuda.current_device())
+        print(torch.cuda.get_device_name(0))
 
         # App Settings
         Settings.ENABLE_CUSTOM_TITLE_BAR = True
@@ -97,18 +110,6 @@ class MainWindow(QMainWindow):
 
 
         self.show() # SHOW APP
-
-        # SET CUSTOM THEME
-        useCustomTheme = False
-        themeFile = "themes\py_dracula_dark.qss"
-
-        # SET THEME AND HACKS
-        if useCustomTheme:
-            # LOAD AND APPLY STYLE
-            UIFunctions.theme(self, themeFile, True)
-
-            # SET HACKS
-            AppFunctions.setThemeHack(self)
 
         # SET HOME PAGE AND SELECT MENU
         widgets.stackedWidget.setCurrentWidget(widgets.home)
@@ -188,16 +189,19 @@ class MainWindow(QMainWindow):
         if self.timer_id:
             self.killTimer(self.timer_id)
             self.timer_id = None
-            widgets.timerLabel.display("00:00:00")
+            widgets.timerLabel.display("00:00")
             self.updated_graph(self.productivity_val)
             widgets.errorLabel.setText("Your Most Critical Error")
-            self.stopwatch_list.append((self.minutes, self.seconds, self.milliseconds))
-            self.minutes, self.seconds, self.milliseconds = 0, 0, 0
+            self.stopwatch_list.append((self.minutes, self.seconds))
+            self.minutes, self.seconds = 0, 0
             self.started = False
         
     def start_video_feed(self):
         if self.cap is None:
             self.cap = cv2.VideoCapture(0)
+            self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+            self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+
             
         # Timer to update the video feed
         self.timer = self.startTimer(42)  # Update every 30ms
@@ -214,11 +218,17 @@ class MainWindow(QMainWindow):
             elapsed_ticks = cv2.getTickCount() - self.timer_start_time
             elapsed_time = elapsed_ticks / cv2.getTickFrequency() # Convert to seconds
             self.minutes, self.seconds = divmod(elapsed_time, 60)
-            _, self.milliseconds = divmod(elapsed_time * 1000, 1000)
-            widgets.timerLabel.display(f"{int(self.minutes):02d}:{int(self.seconds):02d}:{int(self.milliseconds):02d}")
+            widgets.timerLabel.display(f"{int(self.minutes):02d}:{int(self.seconds):02d}")
         else:
+
+            self.frame_count += 1
+            if self.frame_count % self.frame_skip != 0:
+                return
+            
             ret, frame = self.cap.read()
             if ret:
+                frame_tensor = torch.from_numpy(frame).permute(2, 0, 1).float().div(255).to(self.device)  # Assuming your model expects float input in [0, 1]
+
                 # Step 1: Process frame with YOLOv5
                 results = self.model(frame)  # Process the frame
                 pred = results.pred[0] # Get the first prediction (in case of batch processing)
@@ -375,7 +385,7 @@ class MainWindow(QMainWindow):
             print('Mouse click: LEFT CLICK')
             
             print(f"User's list where person leaves frame: {self.person_not_in_frame_list}")
-            print(f"User's list of stopwatch times, stored in (minutes, seconds, milliseconds): {self.stopwatch_list}")
+            print(f"User's list of stopwatch times, stored in (minutes, seconds): {self.stopwatch_list}")
             print(f"User's list of frames where cell phone is detected: {self.phone_in_frame_list}")
 
         if event.buttons() == Qt.RightButton:
