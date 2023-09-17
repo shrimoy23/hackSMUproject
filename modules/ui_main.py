@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainLtCXPG.ui'
+## Form generated from reading UI file 'mainuRyDzN.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.5.2
 ##
@@ -1039,6 +1039,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_15.setContentsMargins(10, 10, 10, 10)
         self.stackedWidget = QStackedWidget(self.pagesContainer)
         self.stackedWidget.setObjectName(u"stackedWidget")
+        self.stackedWidget.setFont(font)
         self.stackedWidget.setStyleSheet(u"background: transparent;")
         self.home = QWidget()
         self.home.setObjectName(u"home")
@@ -1187,7 +1188,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 353, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1403,7 +1404,7 @@ class Ui_MainWindow(object):
         self.startTimerButton.setMouseTracking(True)
         self.timerLabel = QLabel(self.new_page)
         self.timerLabel.setObjectName(u"timerLabel")
-        self.timerLabel.setGeometry(QRect(660, 70, 121, 91))
+        self.timerLabel.setGeometry(QRect(660, 70, 251, 91))
         self.timerLabel.setFont(font)
         self.timerLabel.setLayoutDirection(Qt.LeftToRight)
         self.timerLabel.setFrameShape(QFrame.Box)
@@ -1415,6 +1416,13 @@ class Ui_MainWindow(object):
         self.label.setFrameShape(QFrame.Box)
         self.label.setTextFormat(Qt.AutoText)
         self.label.setAlignment(Qt.AlignCenter)
+        self.stopTimerButton = QPushButton(self.new_page)
+        self.stopTimerButton.setObjectName(u"stopTimerButton")
+        self.stopTimerButton.setGeometry(QRect(790, 10, 121, 41))
+        sizePolicy4.setHeightForWidth(self.stopTimerButton.sizePolicy().hasHeightForWidth())
+        self.stopTimerButton.setSizePolicy(sizePolicy4)
+        self.stopTimerButton.setFont(font)
+        self.stopTimerButton.setMouseTracking(True)
         self.stackedWidget.addWidget(self.new_page)
 
         self.verticalLayout_15.addWidget(self.stackedWidget)
@@ -1683,8 +1691,9 @@ class Ui_MainWindow(object):
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
         self.startTimerButton.setText(QCoreApplication.translate("MainWindow", u"Start Timer", None))
-        self.timerLabel.setText(QCoreApplication.translate("MainWindow", u"Timer", None))
+        self.timerLabel.setText(QCoreApplication.translate("MainWindow", u"00:00", None))
         self.label.setText(QCoreApplication.translate("MainWindow", u"NEW PAGE TEST", None))
+        self.stopTimerButton.setText(QCoreApplication.translate("MainWindow", u"Stop Timer", None))
         self.btn_message.setText(QCoreApplication.translate("MainWindow", u"Message", None))
         self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))

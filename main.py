@@ -32,7 +32,7 @@ class MainWindow(QMainWindow):
 
         # Connect start timer button to method
         widgets.startTimerButton.clicked.connect(self.start_timer)
-        
+        widgets.stopTimerButton.clicked.connect(self.stop_timer)
         # YOLO model initialization
         self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 
@@ -100,6 +100,13 @@ class MainWindow(QMainWindow):
         
         self.timer_start_time = cv2.getTickCount()  # Get current tick count
         self.timer_id = self.startTimer(self.timer_update_interval)  # Start the timer
+
+    def stop_timer(self):
+        if self.timer_id:
+            self.killTimer(self.timer_id)
+            self.timer_id = None
+            widgets.timerLabel.setText("00:00")
+        
 
     # Webcam Functionality
     def start_video_feed(self):

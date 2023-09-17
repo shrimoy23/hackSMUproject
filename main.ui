@@ -1858,6 +1858,14 @@ li.checked::marker { content: &quot;\2612&quot;; }
                    </property>
                    <item>
                     <widget class="QStackedWidget" name="stackedWidget">
+                     <property name="font">
+                      <font>
+                       <family>Segoe UI</family>
+                       <pointsize>10</pointsize>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                      </font>
+                     </property>
                      <property name="styleSheet">
                       <string notr="true">background: transparent;</string>
                      </property>
@@ -2166,7 +2174,7 @@ background-repeat: no-repeat;</string>
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>218</width>
+                                 <width>353</width>
                                  <height>218</height>
                                 </rect>
                                </property>
@@ -2755,7 +2763,7 @@ background-repeat: no-repeat;</string>
                         <rect>
                          <x>660</x>
                          <y>70</y>
-                         <width>121</width>
+                         <width>251</width>
                          <height>91</height>
                         </rect>
                        </property>
@@ -2774,7 +2782,7 @@ background-repeat: no-repeat;</string>
                         <enum>QFrame::Box</enum>
                        </property>
                        <property name="text">
-                        <string>Timer</string>
+                        <string>00:00</string>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignCenter</set>
@@ -2803,6 +2811,36 @@ background-repeat: no-repeat;</string>
                        </property>
                        <property name="alignment">
                         <set>Qt::AlignCenter</set>
+                       </property>
+                      </widget>
+                      <widget class="QPushButton" name="stopTimerButton">
+                       <property name="geometry">
+                        <rect>
+                         <x>790</x>
+                         <y>10</y>
+                         <width>121</width>
+                         <height>41</height>
+                        </rect>
+                       </property>
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Minimum" vsizetype="Ignored">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="font">
+                        <font>
+                         <family>Segoe UI</family>
+                         <pointsize>10</pointsize>
+                         <italic>false</italic>
+                         <bold>false</bold>
+                        </font>
+                       </property>
+                       <property name="mouseTracking">
+                        <bool>true</bool>
+                       </property>
+                       <property name="text">
+                        <string>Stop Timer</string>
                        </property>
                       </widget>
                      </widget>
