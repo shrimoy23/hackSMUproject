@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainbvYWAR.ui'
+## Form generated from reading UI file 'mainuHQrwU.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.5.2
+## Created by: Qt User Interface Compiler version 6.4.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -17,11 +17,11 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QAbstractScrollArea, QApplication, QCheckBox,
     QComboBox, QCommandLinkButton, QFrame, QGridLayout,
-    QHBoxLayout, QHeaderView, QLabel, QLineEdit,
-    QMainWindow, QPlainTextEdit, QPushButton, QRadioButton,
-    QScrollArea, QScrollBar, QSizePolicy, QSlider,
-    QStackedWidget, QTableWidget, QTableWidgetItem, QTextEdit,
-    QVBoxLayout, QWidget)
+    QHBoxLayout, QHeaderView, QLCDNumber, QLabel,
+    QLineEdit, QMainWindow, QPlainTextEdit, QPushButton,
+    QRadioButton, QScrollArea, QScrollBar, QSizePolicy,
+    QSlider, QStackedWidget, QTableWidget, QTableWidgetItem,
+    QTextEdit, QVBoxLayout, QWidget)
 from . resources_rc import *
 
 class Ui_MainWindow(object):
@@ -912,7 +912,13 @@ class Ui_MainWindow(object):
         sizePolicy2.setHeightForWidth(self.titleRightInfo.sizePolicy().hasHeightForWidth())
         self.titleRightInfo.setSizePolicy(sizePolicy2)
         self.titleRightInfo.setMaximumSize(QSize(16777215, 45))
-        self.titleRightInfo.setFont(font)
+        font3 = QFont()
+        font3.setFamilies([u"Segoe UI"])
+        font3.setPointSize(10)
+        font3.setBold(True)
+        font3.setItalic(False)
+        self.titleRightInfo.setFont(font3)
+        self.titleRightInfo.setStyleSheet(u"font-weight: bold;")
         self.titleRightInfo.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_3.addWidget(self.titleRightInfo)
@@ -957,13 +963,13 @@ class Ui_MainWindow(object):
         self.maximizeRestoreAppBtn.setObjectName(u"maximizeRestoreAppBtn")
         self.maximizeRestoreAppBtn.setMinimumSize(QSize(28, 28))
         self.maximizeRestoreAppBtn.setMaximumSize(QSize(28, 28))
-        font3 = QFont()
-        font3.setFamilies([u"Segoe UI"])
-        font3.setPointSize(10)
-        font3.setBold(False)
-        font3.setItalic(False)
-        font3.setStyleStrategy(QFont.PreferDefault)
-        self.maximizeRestoreAppBtn.setFont(font3)
+        font4 = QFont()
+        font4.setFamilies([u"Segoe UI"])
+        font4.setPointSize(10)
+        font4.setBold(False)
+        font4.setItalic(False)
+        font4.setStyleStrategy(QFont.PreferDefault)
+        self.maximizeRestoreAppBtn.setFont(font4)
         self.maximizeRestoreAppBtn.setCursor(QCursor(Qt.PointingHandCursor))
         icon3 = QIcon()
         icon3.addFile(u":/icons/images/icons/icon_maximize.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -1167,7 +1173,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 345, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1257,10 +1263,10 @@ class Ui_MainWindow(object):
         self.tableWidget.setHorizontalHeaderItem(3, __qtablewidgetitem3)
         if (self.tableWidget.rowCount() < 16):
             self.tableWidget.setRowCount(16)
-        font4 = QFont()
-        font4.setFamilies([u"Segoe UI"])
+        font5 = QFont()
+        font5.setFamilies([u"Segoe UI"])
         __qtablewidgetitem4 = QTableWidgetItem()
-        __qtablewidgetitem4.setFont(font4);
+        __qtablewidgetitem4.setFont(font5);
         self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem4)
         __qtablewidgetitem5 = QTableWidgetItem()
         self.tableWidget.setVerticalHeaderItem(1, __qtablewidgetitem5)
@@ -1319,30 +1325,32 @@ class Ui_MainWindow(object):
         brush2.setStyle(Qt.NoBrush)
         palette.setBrush(QPalette.Active, QPalette.Base, brush2)
         palette.setBrush(QPalette.Active, QPalette.Window, brush1)
+        brush3 = QBrush(QColor(221, 221, 221, 128))
+        brush3.setStyle(Qt.SolidPattern)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette.setBrush(QPalette.Active, QPalette.PlaceholderText, brush)
+        palette.setBrush(QPalette.Active, QPalette.PlaceholderText, brush3)
 #endif
         palette.setBrush(QPalette.Inactive, QPalette.WindowText, brush)
         palette.setBrush(QPalette.Inactive, QPalette.Button, brush1)
         palette.setBrush(QPalette.Inactive, QPalette.Text, brush)
         palette.setBrush(QPalette.Inactive, QPalette.ButtonText, brush)
-        brush3 = QBrush(QColor(0, 0, 0, 255))
-        brush3.setStyle(Qt.NoBrush)
-        palette.setBrush(QPalette.Inactive, QPalette.Base, brush3)
+        brush4 = QBrush(QColor(0, 0, 0, 255))
+        brush4.setStyle(Qt.NoBrush)
+        palette.setBrush(QPalette.Inactive, QPalette.Base, brush4)
         palette.setBrush(QPalette.Inactive, QPalette.Window, brush1)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush)
+        palette.setBrush(QPalette.Inactive, QPalette.PlaceholderText, brush3)
 #endif
         palette.setBrush(QPalette.Disabled, QPalette.WindowText, brush)
         palette.setBrush(QPalette.Disabled, QPalette.Button, brush1)
         palette.setBrush(QPalette.Disabled, QPalette.Text, brush)
         palette.setBrush(QPalette.Disabled, QPalette.ButtonText, brush)
-        brush4 = QBrush(QColor(0, 0, 0, 255))
-        brush4.setStyle(Qt.NoBrush)
-        palette.setBrush(QPalette.Disabled, QPalette.Base, brush4)
+        brush5 = QBrush(QColor(0, 0, 0, 255))
+        brush5.setStyle(Qt.NoBrush)
+        palette.setBrush(QPalette.Disabled, QPalette.Base, brush5)
         palette.setBrush(QPalette.Disabled, QPalette.Window, brush1)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-        palette.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush)
+        palette.setBrush(QPalette.Disabled, QPalette.PlaceholderText, brush3)
 #endif
         self.tableWidget.setPalette(palette)
         self.tableWidget.setFrameShape(QFrame.NoFrame)
@@ -1380,20 +1388,22 @@ class Ui_MainWindow(object):
         sizePolicy4.setVerticalStretch(0)
         sizePolicy4.setHeightForWidth(self.startTimerButton.sizePolicy().hasHeightForWidth())
         self.startTimerButton.setSizePolicy(sizePolicy4)
-        self.startTimerButton.setFont(font)
+        self.startTimerButton.setFont(font3)
         self.startTimerButton.setMouseTracking(True)
-        self.timerLabel = QLabel(self.new_page)
-        self.timerLabel.setObjectName(u"timerLabel")
-        self.timerLabel.setGeometry(QRect(880, 60, 251, 91))
-        self.timerLabel.setFont(font)
-        self.timerLabel.setLayoutDirection(Qt.LeftToRight)
-        self.timerLabel.setFrameShape(QFrame.StyledPanel)
-        self.timerLabel.setFrameShadow(QFrame.Plain)
-        self.timerLabel.setAlignment(Qt.AlignCenter)
+        self.startTimerButton.setStyleSheet(u"border: 1px solid #515A63;\n"
+"font-weight: bold;\n"
+"background-color: #222;\n"
+"color: #76acdb;\n"
+"border-radius: 5px;")
         self.videoLabel = QLabel(self.new_page)
         self.videoLabel.setObjectName(u"videoLabel")
         self.videoLabel.setGeometry(QRect(50, 0, 533, 400))
         self.videoLabel.setLayoutDirection(Qt.LeftToRight)
+        self.videoLabel.setStyleSheet(u"border: 1px solid #515A63;\n"
+"font-weight: bold;\n"
+"background-color: #222;\n"
+"color: #76acdb;\n"
+"border-radius: 5px;")
         self.videoLabel.setFrameShape(QFrame.StyledPanel)
         self.videoLabel.setTextFormat(Qt.AutoText)
         self.videoLabel.setAlignment(Qt.AlignCenter)
@@ -1402,35 +1412,74 @@ class Ui_MainWindow(object):
         self.stopTimerButton.setGeometry(QRect(1010, 0, 121, 41))
         sizePolicy4.setHeightForWidth(self.stopTimerButton.sizePolicy().hasHeightForWidth())
         self.stopTimerButton.setSizePolicy(sizePolicy4)
-        self.stopTimerButton.setFont(font)
+        self.stopTimerButton.setFont(font3)
         self.stopTimerButton.setMouseTracking(True)
+        self.stopTimerButton.setStyleSheet(u"border: 1px solid #515A63;\n"
+"font-weight: bold;\n"
+"background-color: #222;\n"
+"color: #76acdb;\n"
+"border-radius: 5px;")
         self.personLabel = QCheckBox(self.new_page)
         self.personLabel.setObjectName(u"personLabel")
         self.personLabel.setGeometry(QRect(610, 70, 251, 21))
         self.personLabel.setAutoFillBackground(False)
-        self.personLabel.setStyleSheet(u"")
+        self.personLabel.setStyleSheet(u"font-weight: bold;")
         self.phoneLabel = QCheckBox(self.new_page)
         self.phoneLabel.setObjectName(u"phoneLabel")
         self.phoneLabel.setGeometry(QRect(610, 100, 251, 21))
         self.phoneLabel.setAutoFillBackground(False)
-        self.phoneLabel.setStyleSheet(u"")
+        self.phoneLabel.setStyleSheet(u"font-weight: bold;")
         self.drowsinessLabel = QCheckBox(self.new_page)
         self.drowsinessLabel.setObjectName(u"drowsinessLabel")
         self.drowsinessLabel.setGeometry(QRect(610, 130, 251, 21))
         self.drowsinessLabel.setAutoFillBackground(False)
-        self.drowsinessLabel.setStyleSheet(u"")
+        self.drowsinessLabel.setStyleSheet(u"font-weight: bold;")
         self.configurationsLabel = QLabel(self.new_page)
         self.configurationsLabel.setObjectName(u"configurationsLabel")
         self.configurationsLabel.setGeometry(QRect(610, 0, 251, 41))
-        self.configurationsLabel.setFrameShape(QFrame.Box)
+        self.configurationsLabel.setStyleSheet(u"border: 1px solid #515A63;\n"
+"font-weight: bold;\n"
+"background-color: #222;\n"
+"color: #76acdb;\n"
+"border-radius: 5px;")
+        self.configurationsLabel.setFrameShape(QFrame.NoFrame)
         self.configurationsLabel.setLineWidth(1)
         self.configurationsLabel.setAlignment(Qt.AlignCenter)
-        self.verticalLayoutWidget = QWidget(self.new_page)
-        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(610, 190, 531, 211))
-        self.productivityGraph = QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalFrame = QFrame(self.new_page)
+        self.verticalFrame.setObjectName(u"verticalFrame")
+        self.verticalFrame.setGeometry(QRect(610, 190, 531, 211))
+        self.verticalFrame.setStyleSheet(u"border: 1px solid #515A63;\n"
+"font-weight: bold;\n"
+"background-color: #222;\n"
+"color: #76acdb;\n"
+"border-radius: 5px;")
+        self.productivityGraph = QVBoxLayout(self.verticalFrame)
         self.productivityGraph.setObjectName(u"productivityGraph")
-        self.productivityGraph.setContentsMargins(0, 0, 0, 0)
+        self.label = QLabel(self.verticalFrame)
+        self.label.setObjectName(u"label")
+        self.label.setAlignment(Qt.AlignCenter)
+
+        self.productivityGraph.addWidget(self.label)
+
+        self.timerLabel = QLCDNumber(self.new_page)
+        self.timerLabel.setObjectName(u"timerLabel")
+        self.timerLabel.setGeometry(QRect(880, 60, 251, 91))
+        sizePolicy5 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.timerLabel.sizePolicy().hasHeightForWidth())
+        self.timerLabel.setSizePolicy(sizePolicy5)
+        self.timerLabel.setLayoutDirection(Qt.LeftToRight)
+        self.timerLabel.setStyleSheet(u"border: 1px solid #515A63;\n"
+"color: #76acdb;\n"
+"background-color: #222;\n"
+"border-radius: 5px;")
+        self.timerLabel.setFrameShadow(QFrame.Plain)
+        self.timerLabel.setSmallDecimalPoint(True)
+        self.timerLabel.setDigitCount(8)
+        self.timerLabel.setMode(QLCDNumber.Dec)
+        self.timerLabel.setSegmentStyle(QLCDNumber.Flat)
+        self.timerLabel.setProperty("value", 0.000000000000000)
         self.stackedWidget.addWidget(self.new_page)
 
         self.verticalLayout_15.addWidget(self.stackedWidget)
@@ -1533,11 +1582,11 @@ class Ui_MainWindow(object):
         self.creditsLabel = QLabel(self.bottomBar)
         self.creditsLabel.setObjectName(u"creditsLabel")
         self.creditsLabel.setMaximumSize(QSize(16777215, 16))
-        font5 = QFont()
-        font5.setFamilies([u"Segoe UI"])
-        font5.setBold(False)
-        font5.setItalic(False)
-        self.creditsLabel.setFont(font5)
+        font6 = QFont()
+        font6.setFamilies([u"Segoe UI"])
+        font6.setBold(False)
+        font6.setItalic(False)
+        self.creditsLabel.setFont(font6)
         self.creditsLabel.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
 
         self.horizontalLayout_5.addWidget(self.creditsLabel)
@@ -1697,13 +1746,13 @@ class Ui_MainWindow(object):
         self.tableWidget.setSortingEnabled(__sortingEnabled)
 
         self.startTimerButton.setText(QCoreApplication.translate("MainWindow", u"Start Timer", None))
-        self.timerLabel.setText(QCoreApplication.translate("MainWindow", u"00:00", None))
         self.videoLabel.setText(QCoreApplication.translate("MainWindow", u"Webcam", None))
         self.stopTimerButton.setText(QCoreApplication.translate("MainWindow", u"Stop Timer", None))
         self.personLabel.setText(QCoreApplication.translate("MainWindow", u"Person Detection", None))
         self.phoneLabel.setText(QCoreApplication.translate("MainWindow", u"Phone Detection", None))
         self.drowsinessLabel.setText(QCoreApplication.translate("MainWindow", u"Drowsiness Detection", None))
         self.configurationsLabel.setText(QCoreApplication.translate("MainWindow", u"Configurations", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Graph", None))
         self.btn_message.setText(QCoreApplication.translate("MainWindow", u"Message", None))
         self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))

@@ -1510,8 +1510,11 @@ li.checked::marker { content: &quot;\2612&quot;; }
                     <family>Segoe UI</family>
                     <pointsize>10</pointsize>
                     <italic>false</italic>
-                    <bold>false</bold>
+                    <bold>true</bold>
                    </font>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">font-weight: bold;</string>
                   </property>
                   <property name="text">
                    <string>FocusGuardian</string>
@@ -2111,7 +2114,7 @@ background-repeat: no-repeat;</string>
                                 <rect>
                                  <x>0</x>
                                  <y>0</y>
-                                 <width>218</width>
+                                 <width>345</width>
                                  <height>218</height>
                                 </rect>
                                </property>
@@ -2336,7 +2339,7 @@ background-repeat: no-repeat;</string>
                                </colorrole>
                                <colorrole role="PlaceholderText">
                                 <brush brushstyle="SolidPattern">
-                                 <color alpha="255">
+                                 <color alpha="128">
                                   <red>221</red>
                                   <green>221</green>
                                   <blue>221</blue>
@@ -2401,7 +2404,7 @@ background-repeat: no-repeat;</string>
                                </colorrole>
                                <colorrole role="PlaceholderText">
                                 <brush brushstyle="SolidPattern">
-                                 <color alpha="255">
+                                 <color alpha="128">
                                   <red>221</red>
                                   <green>221</green>
                                   <blue>221</blue>
@@ -2466,7 +2469,7 @@ background-repeat: no-repeat;</string>
                                </colorrole>
                                <colorrole role="PlaceholderText">
                                 <brush brushstyle="SolidPattern">
-                                 <color alpha="255">
+                                 <color alpha="128">
                                   <red>221</red>
                                   <green>221</green>
                                   <blue>221</blue>
@@ -2688,47 +2691,21 @@ background-repeat: no-repeat;</string>
                          <family>Segoe UI</family>
                          <pointsize>10</pointsize>
                          <italic>false</italic>
-                         <bold>false</bold>
+                         <bold>true</bold>
                         </font>
                        </property>
                        <property name="mouseTracking">
                         <bool>true</bool>
                        </property>
+                       <property name="styleSheet">
+                        <string notr="true">border: 1px solid #515A63;
+font-weight: bold;
+background-color: #222;
+color: #76acdb;
+border-radius: 5px;</string>
+                       </property>
                        <property name="text">
                         <string>Start Timer</string>
-                       </property>
-                      </widget>
-                      <widget class="QLabel" name="timerLabel">
-                       <property name="geometry">
-                        <rect>
-                         <x>880</x>
-                         <y>60</y>
-                         <width>251</width>
-                         <height>91</height>
-                        </rect>
-                       </property>
-                       <property name="font">
-                        <font>
-                         <family>Segoe UI</family>
-                         <pointsize>10</pointsize>
-                         <italic>false</italic>
-                         <bold>false</bold>
-                        </font>
-                       </property>
-                       <property name="layoutDirection">
-                        <enum>Qt::LeftToRight</enum>
-                       </property>
-                       <property name="frameShape">
-                        <enum>QFrame::StyledPanel</enum>
-                       </property>
-                       <property name="frameShadow">
-                        <enum>QFrame::Plain</enum>
-                       </property>
-                       <property name="text">
-                        <string>00:00</string>
-                       </property>
-                       <property name="alignment">
-                        <set>Qt::AlignCenter</set>
                        </property>
                       </widget>
                       <widget class="QLabel" name="videoLabel">
@@ -2742,6 +2719,13 @@ background-repeat: no-repeat;</string>
                        </property>
                        <property name="layoutDirection">
                         <enum>Qt::LeftToRight</enum>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">border: 1px solid #515A63;
+font-weight: bold;
+background-color: #222;
+color: #76acdb;
+border-radius: 5px;</string>
                        </property>
                        <property name="frameShape">
                         <enum>QFrame::StyledPanel</enum>
@@ -2776,11 +2760,18 @@ background-repeat: no-repeat;</string>
                          <family>Segoe UI</family>
                          <pointsize>10</pointsize>
                          <italic>false</italic>
-                         <bold>false</bold>
+                         <bold>true</bold>
                         </font>
                        </property>
                        <property name="mouseTracking">
                         <bool>true</bool>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">border: 1px solid #515A63;
+font-weight: bold;
+background-color: #222;
+color: #76acdb;
+border-radius: 5px;</string>
                        </property>
                        <property name="text">
                         <string>Stop Timer</string>
@@ -2799,7 +2790,7 @@ background-repeat: no-repeat;</string>
                         <bool>false</bool>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true"/>
+                        <string notr="true">font-weight: bold;</string>
                        </property>
                        <property name="text">
                         <string>Person Detection</string>
@@ -2818,7 +2809,7 @@ background-repeat: no-repeat;</string>
                         <bool>false</bool>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true"/>
+                        <string notr="true">font-weight: bold;</string>
                        </property>
                        <property name="text">
                         <string>Phone Detection</string>
@@ -2837,7 +2828,7 @@ background-repeat: no-repeat;</string>
                         <bool>false</bool>
                        </property>
                        <property name="styleSheet">
-                        <string notr="true"/>
+                        <string notr="true">font-weight: bold;</string>
                        </property>
                        <property name="text">
                         <string>Drowsiness Detection</string>
@@ -2852,8 +2843,15 @@ background-repeat: no-repeat;</string>
                          <height>41</height>
                         </rect>
                        </property>
+                       <property name="styleSheet">
+                        <string notr="true">border: 1px solid #515A63;
+font-weight: bold;
+background-color: #222;
+color: #76acdb;
+border-radius: 5px;</string>
+                       </property>
                        <property name="frameShape">
-                        <enum>QFrame::Box</enum>
+                        <enum>QFrame::NoFrame</enum>
                        </property>
                        <property name="lineWidth">
                         <number>1</number>
@@ -2865,7 +2863,7 @@ background-repeat: no-repeat;</string>
                         <set>Qt::AlignCenter</set>
                        </property>
                       </widget>
-                      <widget class="QWidget" name="verticalLayoutWidget">
+                      <widget class="QFrame" name="verticalFrame">
                        <property name="geometry">
                         <rect>
                          <x>610</x>
@@ -2874,7 +2872,57 @@ background-repeat: no-repeat;</string>
                          <height>211</height>
                         </rect>
                        </property>
+                       <property name="styleSheet">
+                        <string notr="true">border: 1px solid #515A63;
+font-weight: bold;
+background-color: #222;
+color: #76acdb;
+border-radius: 5px;</string>
+                       </property>
                        <layout class="QVBoxLayout" name="productivityGraph"/>
+                      </widget>
+                      <widget class="QLCDNumber" name="timerLabel">
+                       <property name="geometry">
+                        <rect>
+                         <x>880</x>
+                         <y>60</y>
+                         <width>251</width>
+                         <height>91</height>
+                        </rect>
+                       </property>
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="layoutDirection">
+                        <enum>Qt::LeftToRight</enum>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">border: 1px solid #515A63;
+color: #76acdb;
+background-color: #222;
+border-radius: 5px;</string>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Plain</enum>
+                       </property>
+                       <property name="smallDecimalPoint">
+                        <bool>true</bool>
+                       </property>
+                       <property name="digitCount">
+                        <number>8</number>
+                       </property>
+                       <property name="mode">
+                        <enum>QLCDNumber::Dec</enum>
+                       </property>
+                       <property name="segmentStyle">
+                        <enum>QLCDNumber::Flat</enum>
+                       </property>
+                       <property name="value" stdset="0">
+                        <double>0.000000000000000</double>
+                       </property>
                       </widget>
                      </widget>
                     </widget>

@@ -39,10 +39,13 @@ class MainWindow(QMainWindow):
         # Time
         self.minute = 0
         self.seconds = 0
+        self.milliseconds = 0
 
         self.timer_start_time = None  # Time when the timer was started
-        self.timer_update_interval = 1000  # Update every second
+        self.timer_update_interval = 1  # Update every second
         self.timer_id = None  # ID of the timer
+
+        widgets.timerLabel.display("00:00:00")
 
         # Data Collection
         self.stopwatch_list = [] # Stores our list of stopwatch times
@@ -106,6 +109,26 @@ class MainWindow(QMainWindow):
         widgets.stackedWidget.setCurrentWidget(widgets.home)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
 
+        # CUSTOM DESIGN FOR CHECKS
+        checkbox_stylesheet = """
+            QCheckBox::indicator {
+                border: 2px solid #76acdb;
+                width: 15px;
+                height: 15px;
+                border-radius: 7px;
+                background-color: transparent;
+            }
+            QCheckBox::indicator:checked {
+                image: url(none.png);
+                border: 2px solid #76acdb;
+                background-color: #222);
+            }
+            """
+
+        widgets.personLabel.setStyleSheet(checkbox_stylesheet)
+        widgets.phoneLabel.setStyleSheet(checkbox_stylesheet)
+        widgets.drowsinessLabel.setStyleSheet(checkbox_stylesheet)
+
     def play_alert_sound(self):
         pygame.mixer.init()
         pygame.mixer.music.load('radar.mp3')
@@ -127,10 +150,10 @@ class MainWindow(QMainWindow):
         if self.timer_id:
             self.killTimer(self.timer_id)
             self.timer_id = None
-            widgets.timerLabel.setText("00:00")
+            widgets.timerLabel.display("00:00:00")
 
-            self.stopwatch_list.append((self.minutes, self.seconds))
-            self.minutes, self.seconds = 0, 0
+            self.stopwatch_list.append((self.minutes, self.seconds, self.milliseconds))
+            self.minutes, self.seconds, self.milliseconds = 0, 0, 0
             self.started = False
         
     def start_video_feed(self):
@@ -138,7 +161,7 @@ class MainWindow(QMainWindow):
             self.cap = cv2.VideoCapture(0)
             
         # Timer to update the video feed
-        self.timer = self.startTimer(30)  # Update every 30ms
+        self.timer = self.startTimer(42)  # Update every 30ms
 
     def stop_video_feed(self):
         if self.cap:
@@ -152,7 +175,8 @@ class MainWindow(QMainWindow):
             elapsed_ticks = cv2.getTickCount() - self.timer_start_time
             elapsed_time = elapsed_ticks / cv2.getTickFrequency() # Convert to seconds
             self.minutes, self.seconds = divmod(elapsed_time, 60)
-            widgets.timerLabel.setText(f"{int(self.minutes):02d}:{int(self.seconds):02d}")
+            _, self.milliseconds = divmod(elapsed_time * 1000, 1000)
+            widgets.timerLabel.display(f"{int(self.minutes):02d}:{int(self.seconds):02d}:{int(self.milliseconds):02d}")
         else:
             ret, frame = self.cap.read()
             if ret:
@@ -270,7 +294,7 @@ class MainWindow(QMainWindow):
             print('Mouse click: LEFT CLICK')
             
             print(f"User's list where person leaves frame: {self.person_not_in_frame_list}")
-            print(f"User's list of stopwatch times, stored in (minutes, seconds): {self.stopwatch_list}")
+            print(f"User's list of stopwatch times, stored in (minutes, seconds, milliseconds): {self.stopwatch_list}")
             print(f"User's list of frames where cell phone is detected: {self.phone_in_frame_list}")
 
         if event.buttons() == Qt.RightButton:
@@ -280,4 +304,4 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon("icon.ico"))
     window = MainWindow()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
