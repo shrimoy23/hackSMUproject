@@ -57,6 +57,9 @@ class MainWindow(QMainWindow):
         self.time_axis = None # Representation of time in the productivity graph
         self.productivity_axis = None # Productivity over time in the productivity graph
         self.productivity_val = 100
+        self.final_person_count = 0
+        self.final_cellphone_count = 0
+        self.final_drowsy_count = 0
         sns.set_theme()
         sns.set_context("paper")
 
@@ -145,9 +148,14 @@ class MainWindow(QMainWindow):
         pygame.mixer.quit()
     
     def updated_graph(self, productivity_val):
-        fig = Figure(figsize = (529, 209))
+        fig = Figure(figsize = (5.31, 2.11))
         ax = fig.add_subplot()
-        fig.set_facecolor('white')
+        ax.set_xlabel('Time')
+        ax.set_ylabel('Productivity Level')
+        ax.tick_params(colors='white', which='both')
+        ax.xaxis.label.set_color('white')
+        ax.yaxis.label.set_color('white')
+        fig.set_facecolor('none')
         if self.time_axis != None:
             self.time_axis.append(self.time_axis[-1] + 1)
         else:
@@ -173,6 +181,9 @@ class MainWindow(QMainWindow):
         if self.timer_id:
             # If timer is already running, stop it first
             self.killTimer(self.timer_id)
+
+        if (self.time_axis != None) or (self.productivity_axis != None):
+            self.remove_graph()
         
         self.timer_start_time = cv2.getTickCount()  # Get current tick count
         self.timer_id = self.startTimer(self.timer_update_interval)  # Start the timer
@@ -183,7 +194,7 @@ class MainWindow(QMainWindow):
             self.killTimer(self.timer_id)
             self.timer_id = None
             widgets.timerLabel.display("00:00:00")
-
+            self.updated_graph(self.productivity_val)
             self.stopwatch_list.append((self.minutes, self.seconds, self.milliseconds))
             self.minutes, self.seconds, self.milliseconds = 0, 0, 0
             self.started = False
@@ -253,6 +264,7 @@ class MainWindow(QMainWindow):
                     self.person_not_in_frame += 1
                     if person_detection_enabled:
                         self.productivity_val -= 5
+                        self.final_person_count += 1
 
 
                 # Check if a cell phone was detected and increment counter
@@ -260,6 +272,7 @@ class MainWindow(QMainWindow):
                     self.phone_in_frame += 1
                     if phone_detection_enabled:
                         self.productivity_val -= 5
+                        self.final_cellphone_count += 1
                 else:
                     if self.phone_in_frame != 0:
                         self.phone_in_frame_list.append(self.phone_in_frame)

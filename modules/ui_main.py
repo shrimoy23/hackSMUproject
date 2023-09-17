@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainuHQrwU.ui'
+## Form generated from reading UI file 'mainIpapUv.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.3
+## Created by: Qt User Interface Compiler version 6.5.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -1173,7 +1173,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 345, 218))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 218, 218))
         self.scrollAreaWidgetContents.setStyleSheet(u" QScrollBar:vertical {\n"
 "	border: none;\n"
 "    background: rgb(52, 59, 72);\n"
@@ -1448,6 +1448,7 @@ class Ui_MainWindow(object):
         self.verticalFrame = QFrame(self.new_page)
         self.verticalFrame.setObjectName(u"verticalFrame")
         self.verticalFrame.setGeometry(QRect(610, 190, 531, 211))
+        self.verticalFrame.setMaximumSize(QSize(531, 211))
         self.verticalFrame.setStyleSheet(u"border: 1px solid #515A63;\n"
 "font-weight: bold;\n"
 "background-color: #222;\n"
@@ -1455,12 +1456,6 @@ class Ui_MainWindow(object):
 "border-radius: 5px;")
         self.productivityGraph = QVBoxLayout(self.verticalFrame)
         self.productivityGraph.setObjectName(u"productivityGraph")
-        self.label = QLabel(self.verticalFrame)
-        self.label.setObjectName(u"label")
-        self.label.setAlignment(Qt.AlignCenter)
-
-        self.productivityGraph.addWidget(self.label)
-
         self.timerLabel = QLCDNumber(self.new_page)
         self.timerLabel.setObjectName(u"timerLabel")
         self.timerLabel.setGeometry(QRect(880, 60, 251, 91))
@@ -1752,7 +1747,6 @@ class Ui_MainWindow(object):
         self.phoneLabel.setText(QCoreApplication.translate("MainWindow", u"Phone Detection", None))
         self.drowsinessLabel.setText(QCoreApplication.translate("MainWindow", u"Drowsiness Detection", None))
         self.configurationsLabel.setText(QCoreApplication.translate("MainWindow", u"Configurations", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"Graph", None))
         self.btn_message.setText(QCoreApplication.translate("MainWindow", u"Message", None))
         self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))
