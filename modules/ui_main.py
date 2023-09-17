@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'mainzDZkZw.ui'
+## Form generated from reading UI file 'mainMDdIID.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.5.2
 ##
@@ -28,7 +28,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1280, 720)
+        MainWindow.resize(1280, 714)
         MainWindow.setMinimumSize(QSize(940, 560))
         self.styleSheet = QWidget(MainWindow)
         self.styleSheet.setObjectName(u"styleSheet")
@@ -291,7 +291,7 @@ class Ui_MainWindow(object):
 "	border: 2px solid rgb(33, 37, 43);\n"
 "	padding-left: 10px;\n"
 "	selection-color: rgb(255, 255, 255);\n"
-"	selection-background-color: rgb(255, 121, 198);\n"
+"	selection-background-color: rgb(64, 71, 88);\n"
 "}\n"
 "QLineEdit:hover {\n"
 "	border: 2px solid rgb(64, 71, 88);\n"
@@ -1409,6 +1409,17 @@ class Ui_MainWindow(object):
         self.timerLabel.setMode(QLCDNumber.Dec)
         self.timerLabel.setSegmentStyle(QLCDNumber.Flat)
         self.timerLabel.setProperty("value", 0.000000000000000)
+        self.errorLabel = QLabel(self.new_page)
+        self.errorLabel.setObjectName(u"errorLabel")
+        self.errorLabel.setGeometry(QRect(250, 420, 691, 41))
+        self.errorLabel.setStyleSheet(u"border: 1px solid #515A63;\n"
+"font-weight: bold;\n"
+"background-color: #222;\n"
+"color: #76acdb;\n"
+"border-radius: 5px;")
+        self.errorLabel.setFrameShape(QFrame.NoFrame)
+        self.errorLabel.setLineWidth(1)
+        self.errorLabel.setAlignment(Qt.AlignCenter)
         self.stackedWidget.addWidget(self.new_page)
 
         self.verticalLayout_15.addWidget(self.stackedWidget)
@@ -1551,7 +1562,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -1675,6 +1686,7 @@ class Ui_MainWindow(object):
         self.phoneLabel.setText(QCoreApplication.translate("MainWindow", u"Phone Detection", None))
         self.drowsinessLabel.setText(QCoreApplication.translate("MainWindow", u"Drowsiness Detection", None))
         self.configurationsLabel.setText(QCoreApplication.translate("MainWindow", u"Configurations", None))
+        self.errorLabel.setText(QCoreApplication.translate("MainWindow", u"Your Most Critical Error", None))
         self.btn_message.setText(QCoreApplication.translate("MainWindow", u"Message", None))
         self.btn_print.setText(QCoreApplication.translate("MainWindow", u"Print", None))
         self.btn_logout.setText(QCoreApplication.translate("MainWindow", u"Logout", None))

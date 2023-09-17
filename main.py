@@ -190,6 +190,7 @@ class MainWindow(QMainWindow):
             self.timer_id = None
             widgets.timerLabel.display("00:00:00")
             self.updated_graph(self.productivity_val)
+            widgets.errorLabel.setText("Your Most Critical Error")
             self.stopwatch_list.append((self.minutes, self.seconds, self.milliseconds))
             self.minutes, self.seconds, self.milliseconds = 0, 0, 0
             self.started = False
@@ -330,6 +331,15 @@ class MainWindow(QMainWindow):
             self.updated_graph(self.productivity_val)
             if self.productivity_val <= 100:
                 self.productivity_val += 1
+
+        if self.final_person_count > self.final_cellphone_count and self.final_person_count > self.final_drowsy_count:
+            widgets.errorLabel.setText("You are often away from your screen.")
+
+        elif self.final_cellphone_count > self.final_person_count and self.final_cellphone_count > self.final_drowsy_count:
+            widgets.errorLabel.setText("You are often looking at or playing with your cellphone.")
+
+        elif self.final_drowsy_count > self.final_cellphone_count and self.final_drowsy_count > self.final_person_count:
+            widgets.errorLabel.setText("You are often drowsy or sleepy. You need some rest.")
 
 
     # BUTTONS CLICK

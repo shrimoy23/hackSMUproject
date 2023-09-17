@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>1280</width>
-    <height>720</height>
+    <height>714</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -1599,7 +1599,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
                       <number>0</number>
                      </property>
                      <property name="currentIndex">
-                      <number>0</number>
+                      <number>2</number>
                      </property>
                      <widget class="QWidget" name="home">
                       <property name="styleSheet">
@@ -2755,6 +2755,35 @@ border-radius: 5px;</string>
                        </property>
                        <property name="value" stdset="0">
                         <double>0.000000000000000</double>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="errorLabel">
+                       <property name="geometry">
+                        <rect>
+                         <x>250</x>
+                         <y>420</y>
+                         <width>691</width>
+                         <height>41</height>
+                        </rect>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">border: 1px solid #515A63;
+font-weight: bold;
+background-color: #222;
+color: #76acdb;
+border-radius: 5px;</string>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::NoFrame</enum>
+                       </property>
+                       <property name="lineWidth">
+                        <number>1</number>
+                       </property>
+                       <property name="text">
+                        <string>Your Most Critical Error</string>
+                       </property>
+                       <property name="alignment">
+                        <set>Qt::AlignCenter</set>
                        </property>
                       </widget>
                      </widget>
