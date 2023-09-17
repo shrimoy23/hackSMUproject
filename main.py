@@ -2,6 +2,8 @@ import sys
 import os
 import platform
 import cv2
+import torch
+from ultralytics import YOLO
 
 from modules import *
 from widgets import *
@@ -20,7 +22,19 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
 
+        # Webcam off as default
         self.cap = None
+
+        # Initialize timer variables
+        self.timer_start_time = None  # Time when the timer was started
+        self.timer_update_interval = 1000  # Update every second
+        self.timer_id = None  # ID of the timer
+
+        # Connect start timer button to method
+        widgets.startTimerButton.clicked.connect(self.start_timer)
+        
+        # YOLO model initialization
+        self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         Settings.ENABLE_CUSTOM_TITLE_BAR = True
@@ -79,6 +93,14 @@ class MainWindow(QMainWindow):
         widgets.stackedWidget.setCurrentWidget(widgets.home)
         widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
 
+    def start_timer(self):
+        if self.timer_id:
+            # If timer is already running, stop it first
+            self.killTimer(self.timer_id)
+        
+        self.timer_start_time = cv2.getTickCount()  # Get current tick count
+        self.timer_id = self.startTimer(self.timer_update_interval)  # Start the timer
+
     # Webcam Functionality
     def start_video_feed(self):
         if self.cap is None:
@@ -94,14 +116,34 @@ class MainWindow(QMainWindow):
             self.cap = None
 
     def timerEvent(self, event):
-        ret, frame = self.cap.read()
-        if ret:
-            rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-            h, w, ch = rgb_image.shape
-            bytes_per_line = ch * w
-            convert_to_Qt_format = QImage(rgb_image.data, w, h, bytes_per_line, QImage.Format.Format_RGB888)
-            p = convert_to_Qt_format.scaled(640, 480, Qt.AspectRatioMode.KeepAspectRatio)
-            widgets.label.setPixmap(QPixmap.fromImage(p))
+        if event.timerId() == self.timer_id:
+            # Timer event for our timer
+            elapsed_ticks = cv2.getTickCount() - self.timer_start_time
+            elapsed_time = elapsed_ticks / cv2.getTickFrequency()  # Convert to seconds
+            minutes, seconds = divmod(elapsed_time, 60)
+            widgets.timerLabel.setText(f"{int(minutes):02d}:{int(seconds):02d}")
+        else:
+            ret, frame = self.cap.read()
+            if ret:
+                # Step 1: Process frame with YOLOv5
+                results = self.model(frame)  # Process the frame
+                pred = results.pred[0]       # Get the first prediction (in case of batch processing)
+
+                # Step 2: Draw bounding boxes and labels on the frame
+                for det in pred:
+                    if det[4] > 0.3:  # Confidence threshold, can be adjusted
+                        x1, y1, x2, y2 = map(int, det[:4])
+                        label = f'{self.model.names[int(det[5])]} {det[4]:.2f}'
+                        frame = cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)  # Draw a green rectangle
+                        frame = cv2.putText(frame, label, (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
+
+                # Step 3: Display the frame
+                rgb_image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                h, w, ch = rgb_image.shape
+                bytes_per_line = ch * w
+                convert_to_Qt_format = QImage(rgb_image.data, w, h, bytes_per_line, QImage.Format.Format_RGB888)
+                p = convert_to_Qt_format.scaled(640, 480, Qt.AspectRatioMode.KeepAspectRatio)
+                widgets.label.setPixmap(QPixmap.fromImage(p))
 
     # BUTTONS CLICK
     # Post here your functions for clicked buttons
